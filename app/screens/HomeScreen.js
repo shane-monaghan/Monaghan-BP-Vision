@@ -1,26 +1,30 @@
-import {React, useEffect, useState} from 'react';
-import {StyleSheet, View } from 'react-native';
+import {React, useEffect, useState, useContext} from 'react';
+import {StyleSheet, View, Image } from 'react-native';
 import Button from '../../components/Button';
 import { StatusBar } from 'expo-status-bar';
-import ImageViewer from '../../components/ImageViewer';
+// import ImageViewer from '../../components/ImageViewer';
 import * as ImagePicker from 'expo-image-picker';
-import { useIsFocused, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 
-const PlaceholderImage = require('../assets/images/background-image.png')
+const logo = require('../assets/images/BP_logo.png')
 
 function HomeScreen({navigation}) {
+    const {logout} = useContext(AuthContext);
     const route = useRoute();
-    const isFocused = useIsFocused();
+    //const isFocused = useIsFocused();
     const [selectedImage, setSelectedImage] = useState(null);
 
+    //When picture is sent from cameraScreen, update in HomeScreen
     useEffect(() =>{
-      if(isFocused && route.params && route.params.selectedImage){
+      if(route.params && route.params.selectedImage){
         setSelectedImage(route.params.selectedImage);
       }
-    }, [isFocused, route.params]);
+    }, [route.params]);
 
+    //Bring up media library to choose picture
     const pickImageAsync = async() => {
         let result = await ImagePicker.launchImageLibraryAsync({
           allowsEditing: true,
@@ -28,6 +32,7 @@ function HomeScreen({navigation}) {
         });
 
     
+        //If a picture is not selected, let the user know
         if (!result.canceled){
           setSelectedImage(result.assets[0].uri);
         } else {
@@ -35,40 +40,49 @@ function HomeScreen({navigation}) {
         }
         };
 
-    //Switch to CameraScreen
-    function toCamera(){
-      navigation.navigate('Camera', {setSelectedImage: setSelectedImage});
+    //Navigate to CameraScreen
+    // function toCamera(){
+    //   navigation.navigate('Camera', {setSelectedImage: setSelectedImage});
+    // }
+
+    // //Navigate to TestScreen
+    // function toTest(){
+    //   navigation.navigate('Test')
+    // }
+
+    // //Navigate to Image Test Screen
+    // function toITScreen() {
+    //   navigation.navigate('ITScreen', { selectedImage: { uri: selectedImage } });
+    // } 
+
+
+    function toSavedSessions(){
+      navigation.navigate('SavedSessions')
     }
 
+    //Navigate to Seven Photo Screen
+    function toSPS(){
+      navigation.navigate('SevenPhoto')
+    }
 
-    const sendImage = async() => {
-      const flaskURL = 'http://134.82.182.163:5000/'
-      if (selectedImage){
-        try{
-            const response = await axios.post(flaskURL ,{
-            selectedImage: selectedImage
-          });
-          setSelectedImage(response.data)
-        }catch(error){
-          console.log('Error sending image: ', error);
-        }
-      } else{
-        alert('No image selected');
-      }
-    };
+    
     //HomeScreen Components
     return(
         <View style={styles.container}>
         <View style = {styles.imageContainer}>
-          <ImageViewer placeholderImageSource={PlaceholderImage}
+          {/* <ImageViewer placeholderImageSource={PlaceholderImage}
           selectedImage={selectedImage}
-          />
+          /> */}
+          <Image resizeMode='contain' source={logo}/>
         </View>
         <View style = {styles.footerContainer}>
-          <Button theme = "toCameraScreen" label = "Take a photo" onPress={(toCamera)} />
-          <Button theme = "toGallery" label="Choose a photo" onPress={pickImageAsync} />
-          <Button label="Use default image" onPress = {() => setSelectedImage(null)} />
-          <Button label="Use this image" onPress={sendImage}/>
+          <Button theme = "toCameraScreen" label = "Start a new session" onPress={(toSPS)} />
+          <Button theme = "toGallery" label="View previous sessions" onPress={toSavedSessions} />
+          {/* <Button label="Use default image" onPress = {() => setSelectedImage(null)} /> */}
+          {/* <Button label="Test Page" onPress={(toTest)}/> */}
+          {/* <Button label="To Image Test Screen" onPress={toITScreen}/> */}
+          {/* <Button label="To Seven Photos" onPress={toSPS}/> */}
+          {/* <Button label = "Logout" onPress = {()=> {logout()}}/> */}
         </View>
         <StatusBar style="auto" />
       </View>
@@ -77,17 +91,20 @@ function HomeScreen({navigation}) {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 3,
+      flex: 2,
       backgroundColor: 'gray',
       alignItems: 'center',
     },
     imageContainer: {
-      flex: 2,
+      flex: 1,
       paddingTop: 100,
+      left: -20,
+      position: 'relative',
     },
     footerContainer: {
       flex: 1,
       alignItems: 'center',
+      justifyContent: 'space-evenly',
     },
 });
 export default HomeScreen;

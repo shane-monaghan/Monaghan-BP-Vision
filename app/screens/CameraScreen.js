@@ -1,9 +1,14 @@
 import { Camera, CameraType, FlashMode } from 'expo-camera';
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, Dimensions } from 'react-native';
 import Button from '../../components/Button';
 import * as MediaLibrary from 'expo-media-library'
 import * as FaceDetectorConstants from 'expo-face-detector';
+import { useNavigation } from '@react-navigation/native';
+
+
+const windowWidth = Dimensions.get('screen').width;
+const windowHeight = Dimensions.get('screen').height;
 
 
 function CameraScreen({navigation, route}) {
@@ -14,8 +19,10 @@ function CameraScreen({navigation, route}) {
   const [flash, setFlash] = useState(FlashMode.off);
   const [detectedFaces, setDetectedFaces] = useState([]);
 
+  //Create Camera
   let cameraRef = useRef(null);
 
+  //Request media library permissions
   useEffect(() => {
     (async() =>{
       const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
@@ -29,7 +36,7 @@ function CameraScreen({navigation, route}) {
     return <View />;
   }
 
-  //Remind user permissions are required
+  //Remind user to allow camera permissions
   if (!permission.granted) {
     return (
       <View style={styles.container}>
@@ -39,6 +46,7 @@ function CameraScreen({navigation, route}) {
     );
   }
 
+  //Remind user to allow media library permissions
   if (!mediaLibraryPermission){
     return(<View style={styles.container}>
       <Text style={{ textAlign: 'center' }}>We need your permission to access media library</Text>
@@ -52,6 +60,7 @@ function CameraScreen({navigation, route}) {
     setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
   }
 
+  //Switch flash on or off
   function toggleFlash(){
     setFlash(
       flash === FlashMode.off? FlashMode.on: FlashMode.off
@@ -68,6 +77,8 @@ function CameraScreen({navigation, route}) {
     };
     let newPhoto = await cameraRef.current.takePictureAsync(options);
     setPhoto(newPhoto);
+
+    //Transfer photo from CameraScreen to HomeScreen after its taken
     if (route.params && route.params.setSelectedImage){
       route.params.setSelectedImage(newPhoto.uri);
     }
@@ -77,6 +88,8 @@ function CameraScreen({navigation, route}) {
   }
   };
 
+
+  //If a photo has been taken, switch from camera taking screen to photo management
   if (photo){
     let savePhoto= () => {
       MediaLibrary.saveToLibraryAsync(photo.uri).then(()=> {
@@ -91,9 +104,10 @@ function CameraScreen({navigation, route}) {
           resizeMode = "cover"
           source = {{ uri: "data:image/jpg;base64," + photo.base64}}
           />
-        <View style = {styles.buttonContainer}>
+          
+        <View style = {styles.previewButtonContainer}>
           {mediaLibraryPermission ? <Button theme = "savePhoto" label = "Save Photo" onPress = {savePhoto}/> :undefined}
-          <Button theme = "home" label = "Home" onPress={toHome}/>
+          <Button aria-label = "To Home Screen" theme = "home" label = "Home" onPress={toHome}/>
           <Button theme = "trash" label = "Trash" onPress = {() => setPhoto(undefined)}/>
         </View>
       </SafeAreaView>
@@ -105,15 +119,12 @@ function CameraScreen({navigation, route}) {
     navigation.navigate('Home', {photo: photo}
   );}
 
+  //When a face is detected, add it to the array of detected faces
   const handleFacesDetected = ({faces}) => {
     if (faces.length > 0){
       //console.log('Face Detected: ', faces);
       setDetectedFaces(faces);  
     }
-    // for (const face of faces){
-    //   const{landmarks} = face;
-    //   //console.log("Landmarks", landmarks);
-    // }
   };
 
   // const adjustCameraSize = async () => {
@@ -124,9 +135,9 @@ function CameraScreen({navigation, route}) {
   //   }
   // };
 
-  //CameraScreen components
+  //Before photo is taken / if photo has been deleted or saved, show picture taking screen
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Camera 
       ref = {cameraRef} 
       style={styles.camera} 
@@ -142,6 +153,8 @@ function CameraScreen({navigation, route}) {
         }}
         //onCameraReady = {adjustCameraSize}
         >
+
+        {/* Build box around persons face */}
         {detectedFaces.map((face, index) => (
           <React.Fragment key={index}>
             <View 
@@ -153,10 +166,15 @@ function CameraScreen({navigation, route}) {
                 height: face.bounds.size.height,
                 },
               ]}
-            />
+            >
+              {/* <Image style ={styles.faceImage}
+              source={require('../assets/face-outline.png')}
+              resizeMode='cover'
+              /> */}
+            </View>
           </React.Fragment>
         ))}
-        
+
         <View style = {styles.buttonContainer}>
         {type === CameraType.back ?(
           flash === FlashMode.off ?(
@@ -167,16 +185,33 @@ function CameraScreen({navigation, route}) {
           ): null}
         </View>
 
-
+        <Image style ={styles.faceImage}
+              source={require('../assets/face-outline.png')}
+              resizeMode='cover'
+              />
         <View style={styles.buttonContainer}>
           <Button theme = "flipCam" onPress={toggleCameraType}/>
           <Button theme = "takePic" onPress={takePhoto}/>
           <Button theme = "home" onPress = {toHome}/>
         </View>
-      </Camera>
-    </View>
+        </Camera>
+    </SafeAreaView>
   );
 }
+
+// const calculateImageStyle = (faceBounds) => {
+//   const imageWidth = faceBounds.size.width;
+//   const imageHeight = faceBounds.size.height;
+
+//   return{
+//     width: imageWidth,
+//     height: imageHeight,
+//     position: 'absolute',
+//     alignSelf: 'center',
+//     top: faceBounds.origin.y,
+//     left: faceBounds.origin.x,
+//   };
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -184,36 +219,50 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "grey",
-    resizeMode: 'contain',
+    width: windowWidth,
+    height: windowHeight,
   },
   camera: {
     flex: 1,
+    width: windowWidth,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   preview: {
     flex: 20,
-    alignSelf: "stretch",
-    alignItems: "center",
+    alignSelf: 'stretch',
+    alignItems: 'center',
   },
   buttonContainer: {
     width: 450,
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'transparent',
+    margin: 30,
+    alignSelf: 'center',
+    justifyContent: 'space-evenly',
+  },
+  previewButtonContainer: {
+    width: 450,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    marginBottom: 12,
     margin: 64,
     alignSelf: 'center',
     justifyContent: 'space-evenly',
   },
   faceRectangle:{
     position: 'absolute',
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: 'red',
   },
-  landmark:{
-    position: 'absolute',
-    width: 6,
-    height: 6,
-    borderWidth: 6,
-    borderColor: 'red',
+  faceImage:{
+    alignSelf: 'center',
+    alignItems: 'center',
+    height: 400,
+    width: 400,
   },
 });
 
