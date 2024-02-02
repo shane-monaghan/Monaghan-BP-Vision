@@ -10,5 +10,14 @@ start expo: npx expo start
 
 In ____\testing1\pythonStuff:
 start flask server: flask --app pythonTest run --host=0.0.0.0
+or: python pythonTest.py run --host=0.0.0.0
 
 Scan the QR code with your phones camera to automatically connect to the app.
+
+
+
+Future Work:
+Generating more accurate feature detection
+GUI improvements
+Analyzing results
+Continued testing updating.
