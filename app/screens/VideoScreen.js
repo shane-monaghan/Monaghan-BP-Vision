@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
-import { Camera } from 'expo-camera';
+import { Camera, CameraView } from 'expo-camera';
 import { Video } from 'expo-av';
 import * as MediaLibrary from 'expo-media-library';
 import Button from '../../components/Button';
@@ -9,7 +9,7 @@ function VideoScreen({ navigation, route }) {
   const [isRecording, setIsRecording] = useState(false);
   const [video, setVideo] = useState(undefined);
   const [hasMicrophonePermission, setHasMicrophonePermission] = useState();
-  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
+  const [cameraType, setCameraType] = useState('back');
   const cameraRef = useRef();
 
   useEffect(() => {
@@ -90,7 +90,7 @@ function VideoScreen({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cameraContainer}>
-        <Camera style={styles.camera} type={cameraType} ref={cameraRef}>
+        <CameraView style={styles.camera} facing={cameraType} ref={cameraRef} mode="video">
           <Image
             style={styles.faceImage}
             source={require('../assets/face-outline.png')}
@@ -102,9 +102,9 @@ function VideoScreen({ navigation, route }) {
               style = {styles.flipButton}
               onPress={() =>
                 setCameraType(
-                  cameraType === Camera.Constants.Type.back
-                    ? Camera.Constants.Type.front
-                    : Camera.Constants.Type.back
+                  cameraType === 'back'
+                    ? 'front'
+                    : 'back'
                 )
               }
             >
@@ -115,7 +115,7 @@ function VideoScreen({ navigation, route }) {
             />
             <Button theme='backButton' onPress={goBack} />
           </View>
-        </Camera>
+        </CameraView>
       </View>
     </SafeAreaView>
   );
