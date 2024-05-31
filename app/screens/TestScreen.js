@@ -10,7 +10,8 @@ function TestScreen({navigation}) {
   const [num, setNum] = useState(1);
   const [baseText, setBaseText] = useState("Reverse")
   const [txt,setTxt] = useState();
-  const flaskURL = 'http://134.82.182.163:5000/';
+  // const flaskURL = 'http://134.82.182.163:5000/';
+  const flaskURL = 'http://134.82.187.57:5000/';
 
 
   // Pause program until a response is generated

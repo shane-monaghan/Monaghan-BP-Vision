@@ -13,7 +13,8 @@ function DataScreen2({ navigation, route }) {
   const { originalPictures } = route.params;
   // const flaskURL = 'http://134.82.182.163:5000/'; // SCHOOL
   // const flaskURL = 'http://192.168.12.126:5000/'; // HOME
-  const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
+  // const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
+  const flaskURL = 'http://134.82.187.57:5000/';
   const [landmarkData, setLandmarkData] = useState([
     null, null, null, null, null, null, null
   ]);

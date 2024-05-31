@@ -10,7 +10,8 @@ import { Crypt, RSA } from 'hybrid-crypto-js';
 
 function ImageTestScreen({ navigation, route }) {
   const { selectedImage } = route.params;
-  const flaskURL = 'http://134.82.182.163:5000/';
+  // const flaskURL = 'http://134.82.182.163:5000/';
+  const flaskURL = 'http://134.82.187.57:5000/';
   const [photo, setPhoto] = useState(null);
   const [isBlackAndWhite, setIsBlackAndWhite] = useState(false);
 

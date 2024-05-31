@@ -9,7 +9,8 @@ import utf8 from 'utf8'
 const PlaceholderImage = require('../assets/images/colorful_picture.jpg')
 
 function GenericImageTestScreen({ navigation}) {
-  const flaskURL = 'http://134.82.182.163:5000/';
+  // const flaskURL = 'http://134.82.182.163:5000/';
+  const flaskURL = 'http://134.82.187.57:5000/';
   const [photo, setPhoto] = useState(null);
 
 

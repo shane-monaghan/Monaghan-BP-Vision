@@ -10,7 +10,8 @@ export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setUserToken] = useState(null);
     // const flaskURL = 'http://134.82.182.163:5000/';
-    const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
+    // const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
+    const flaskURL = 'http://134.82.187.57:5000/';
     const [registeredUsers, setRegisteredUsers] = useState([]);
 
     const login = async (username, password) => {

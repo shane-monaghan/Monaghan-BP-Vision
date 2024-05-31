@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+from PIL import Image
 import cv2
 import numpy as np
 import base64
@@ -354,4 +355,4 @@ def plotPoints():
 
 if __name__ == "__main__":
     load_registered_users()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

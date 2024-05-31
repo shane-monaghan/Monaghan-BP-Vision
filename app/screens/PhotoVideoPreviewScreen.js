@@ -13,7 +13,8 @@ function PhotoVideoPreview({ navigation, route }) {
   const [BWPictures, setBWPictures] = useState([null, null, null, null, null, null, null]);
   // const flaskURL = 'http://134.82.182.163:5000/'; //SCHOOL
   // const flaskURL = 'http://192.168.12.126:5000/'; // HOME
-  const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
+  // const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
+  const flaskURL = 'http://134.82.187.57:5000/';
   const [video, setVideo] = useState(route.params.videoUri);
   const [isPlotted, setIsPlotted] = useState(false);
   const [index, setIndex] = useState(0);
