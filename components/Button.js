@@ -8,11 +8,11 @@ export default function Button({ label, theme, onPress }) {
   if (theme === "toCameraScreen"){
     return(
         //What container, and alternate settings for that container
-        <View style = {[styles.buttonContainer, {borderWidth: 4, borderColor: "black", borderRadius: 15}]}
+        <View style = {[styles.buttonContainer, {borderWidth: 0, borderColor: "white", borderRadius: 15, margin: 30, marginTop: 85}]}
     >
         {/* Declare the button is pressable */}
         <Pressable
-         style = {[styles.button, {backgroundColor: "white"}]}
+         style = {[styles.button, {backgroundColor: '#33ADF0'}]}
          onPress = {onPress}
          accessibilityLanguage='To Home'
          >
@@ -21,12 +21,12 @@ export default function Button({ label, theme, onPress }) {
           <Ionicons
           name = "camera"
           size = {18}
-          color = "#25292e"
+          color = 'white'
           style = {styles.buttonIcon}
           />
           
           {/* Text styling */}
-          <Text style = {[styles.buttonLabel, {color: "#25292e"}]}>{label}</Text>  
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>  
          </Pressable>
     </View>
     );
@@ -35,7 +35,7 @@ export default function Button({ label, theme, onPress }) {
   //To gallery button
   else if (theme === "toGallery"){
     return(
-      <View style = {[styles.buttonContainer, {borderWidth: 4, borderColor: "black", borderRadius: 15}]}>
+      <View style = {[styles.buttonContainer, {borderWidth: 0, borderColor: '#33ADF0', borderRadius: 15}]}>
         <Pressable 
         style = {[styles.button, {backgroundColor: "white"}]}
         onPress = {onPress}
@@ -43,9 +43,9 @@ export default function Button({ label, theme, onPress }) {
           <FontAwesome
           name = "picture-o"
           size = {18}
-          color = "black"
+          color = '#33ADF0'
           style = {styles.buttonIcon}/>
-          <Text style = {[styles.buttonLabel, {color: "black"}]}>{label}</Text>
+          <Text style = {[styles.buttonLabel, {color: '#33ADF0'}]}>{label}</Text>
         </Pressable>
       </View>
     )
@@ -53,7 +53,7 @@ export default function Button({ label, theme, onPress }) {
 
   else if (theme === "saveSession"){
     return(
-      <View style = {[styles.buttonContainer, {borderWidth: 4, borderColor: "black", borderRadius: 15}]}>
+      <View style = {[styles.buttonContainer, {borderWidth: 0, borderColor: "black", borderRadius: 15}]}>
         <Pressable 
         style = {[styles.button, {backgroundColor: "white"}]}
         onPress = {onPress}
@@ -381,6 +381,7 @@ const styles = StyleSheet.create({
   },
   buttonLabel: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
+    fontWeight: 'bold'
   },
 });

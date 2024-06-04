@@ -9,7 +9,8 @@ import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
 
-const logo = require('../assets/images/BP_logo.png')
+// const logo = require('../assets/images/BP_logo.png')
+const logo = require('../assets/images/eyeball.webp')
 
 function HomeScreen({navigation}) {
     const {logout} = useContext(AuthContext);
@@ -73,7 +74,7 @@ function HomeScreen({navigation}) {
           {/* <ImageViewer placeholderImageSource={PlaceholderImage}
           selectedImage={selectedImage}
           /> */}
-          <Image resizeMode='contain' source={logo}/>
+          <Image resizeMode='cover' source={logo}/>
         </View>
         <View style = {styles.footerContainer}>
           <Button theme = "toCameraScreen" label = "Start a new session" onPress={(toSPS)} />
@@ -105,6 +106,10 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-evenly',
+    },
+    image: {
+      width: 200,
+      height: 200
     },
 });
 export default HomeScreen;

@@ -20,6 +20,7 @@ import SavedDatesScreen from '../screens/SavedDatesScreen';
 import DataScreen2 from '../screens/DataScreen2';
 
 import { AuthContext } from '../context/AuthContext';
+import HomeScreen2 from '../screens/HomeScreen2';
 
 
 const Stack = createNativeStackNavigator();
@@ -38,7 +39,7 @@ const AppNav = () => {
         <NavigationContainer>
             {/* {userToken !== null ?  */}
             <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Home" component={HomeScreen2} />
                 <Stack.Screen name="Camera" component={CameraScreen} />
                 <Stack.Screen name="Test" component={TestScreen} />
                 <Stack.Screen name="ITScreen" component={ImageTestScreen} />
