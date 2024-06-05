@@ -69,6 +69,48 @@ export default function Button({ label, theme, onPress }) {
     )
   }
 
+  // Record Video Button
+  else if (theme === "recordVideo"){
+    return(
+      <View style = {styles.sessionMenuButtonContainer}>
+        <Pressable 
+        style = {[styles.button, {backgroundColor: "#00419D"}]}
+        onPress = {onPress}
+        >
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>
+        </Pressable>
+      </View>
+    )
+  }
+
+  // Preview Button
+  else if (theme === "previewButton"){
+    return(
+      <View style = {styles.sessionMenuButtonContainer}>
+        <Pressable 
+        style = {[styles.button, {backgroundColor: "white", borderWidth: 1, borderColor: "#00419D"}]}
+        onPress = {onPress}
+        >
+          <Text style = {[styles.buttonLabel, {color: "#00419D"}]}>{label}</Text>
+        </Pressable>
+      </View>
+    )
+  }
+
+  // Home Button
+  else if (theme === "homeButton"){
+    return(
+      <View style = {styles.sessionMenuButtonContainer}>
+        <Pressable 
+        style = {[styles.button, {backgroundColor: "#00419D"}]}
+        onPress = {onPress}
+        >
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>
+        </Pressable>
+      </View>
+    )
+  }
+
   //Take picture button
   else if (theme === "takePic"){
     return(
@@ -313,6 +355,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
+  },
+  sessionMenuButtonContainer: {
+    width: 320,
+    height: 60,
+    marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
   },
   textButtonContainer: {
     width: 320,
