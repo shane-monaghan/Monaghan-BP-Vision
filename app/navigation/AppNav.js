@@ -22,6 +22,7 @@ import DataScreen2 from '../screens/DataScreen2';
 import { AuthContext } from '../context/AuthContext';
 import HomeScreen2 from '../screens/HomeScreen2';
 import SessionMenu from '../screens/SessionMenu';
+import PicturePreview2 from '../screens/PicturePreviewScreen2';
 
 
 const Stack = createNativeStackNavigator();
@@ -47,7 +48,7 @@ const AppNav = () => {
                 <Stack.Screen name="genericImageTest" component={GenericImageTestScreen} />
                 <Stack.Screen name="SevenPhoto" component={SessionMenu} />
                 <Stack.Screen name="Camera2" component={CameraScreen2} />
-                <Stack.Screen name="PicturePreview" component={PicturePreview} />
+                <Stack.Screen name="PicturePreview" component={PicturePreview2} />
                 <Stack.Screen name="VideoScreen" component={VideoScreen} />
                 {/* <Stack.Screen name="VideoPreview" component={VideoPreview} /> */}
                 <Stack.Screen name="PhotoVideoPreview" component={PhotoVideoPreview} />

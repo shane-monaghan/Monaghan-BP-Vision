@@ -111,6 +111,20 @@ export default function Button({ label, theme, onPress }) {
     )
   }
 
+  // Right Arrow Button
+  else if (theme === "rightArrow"){
+    return(
+      <View style = {styles.arrowButtonContainer}>
+        <Pressable 
+        style = {[styles.button, {backgroundColor: "#00419D"}]}
+        onPress = {onPress}
+        >
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>
+        </Pressable>
+      </View>
+    )
+  }
+
   //Take picture button
   else if (theme === "takePic"){
     return(
@@ -203,7 +217,7 @@ export default function Button({ label, theme, onPress }) {
   //Right Arrow Button
   else if (theme === "right-arrow"){
     return(
-      <View style={styles.pictureButtonContainer}>
+      <View style={styles.arrowButtonContainer}>
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Transfer to right'>
       <Ionicons
           name = "md-arrow-forward-circle"
@@ -363,6 +377,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
+  },
+  arrowButtonContainer: {
+    width: '30%',
+    height: '40%',
+    marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
   },
   textButtonContainer: {
     width: 320,
