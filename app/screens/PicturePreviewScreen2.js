@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
 import Button from '../../components/Button';
 
-const noPic = require('../assets/images/noImageUploaded.png');
+const noPic = require('../assets/images/imageNotFound.jpg');
 
 function PicturePreview2({ navigation, route }) {
     const {pictures} = route.params;
@@ -46,6 +46,26 @@ if (index == 0) {
         </View>
     );
 }
+else if (index > 0 && index < 6) {
+    return (
+        <View style={styles.container}>
+            <View>
+                <Text style={[styles.text, styles.header]}>{pictureTitles[index]}</Text>
+            </View>
+            <View style={styles.line}></View>
+            {pictures[index] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[index] }} />) 
+            : (<Image style={styles.image} resizeMode='cover' source={noPic} />)}
+            <View style={styles.buttonContainer}>
+                <View style={styles.rowContainer}>
+                    <Button theme = "rightArrow" label="<-" onPress={downOne} />
+                    <Button theme = "rightArrow" label="->" onPress={upOne} />
+                </View>
+                <Button theme={'homeButton'} label="SESSION MENU" onPress={goBack} />
+            </View>    
+        </View>
+    );
+}
 else {
     return (
         <View style={styles.container}>
@@ -53,6 +73,13 @@ else {
                 <Text style={[styles.text, styles.header]}>{pictureTitles[index]}</Text>
             </View>
             <View style={styles.line}></View>
+            {pictures[index] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[index] }} />) 
+            : (<Image style={styles.image} resizeMode='cover' source={noPic} />)}
+            <View style={styles.oneArrowContainer}>
+                <Button theme = "rightArrow" label="<-" onPress={downOne} />
+                <Button theme={'homeButton'} label="SESSION MENU" onPress={goBack} />
+            </View>    
         </View>
     );
 }
@@ -62,6 +89,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center'
+    },
+    rowContainer: {
+        minHeight: '10%',
+        flexDirection: 'row',
+        marginBottom: -55
     },
     line: {
         borderBottomColor: '#00419D',
@@ -94,6 +126,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         top: '85%',
+        left: 0,
+        right: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+      },
+      buttonContainer: {
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: '88%',
         left: 0,
         right: 0,
         marginLeft: 'auto',
