@@ -6,9 +6,9 @@ import * as FileSystem from 'expo-file-system';
 import axios from 'axios';
 
 
-const noPic = require('../assets/images/noImageUploaded.png');
+const noPic = require('../assets/images/imageNotFound.jpg');
 
-function PhotoVideoPreview({ navigation, route }) {
+function PhotoVideoPreview2({ navigation, route }) {
   const { pictures } = route.params;
   const [BWPictures, setBWPictures] = useState([null, null, null, null, null, null, null]);
   // const flaskURL = 'http://134.82.182.163:5000/'; //SCHOOL
@@ -142,128 +142,141 @@ function PhotoVideoPreview({ navigation, route }) {
     setBWPictures([null, null, null, null, null, null, null]);
   };
 
-  const toDataScreen = async () => {
-    navigation.navigate("DataScreen", {
-      originalPictures: pictures,
-      pictures: BWPictures,
-      name: route.params.name,
-      date: route.params.date,
-    });
-  };
-  
-
-  if (index === 0) {
+  if (index == 0) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{pictureTitles[index]}</Text>
-        {pictures[index] ? (
-          isPlotted ? (
-            <Image style={styles.image} resizeMode = "cover" source={{ uri: `data:image/jpeg;base64,${BWPictures[index]}` }} />
-          ) : (
-            <Image style={styles.image} resizeMode='contain' source={{ uri: pictures[index] }} />
-          )
-        ) : (
-          <Image style={styles.image} resizeMode='contain' source={noPic} />
-        )}
-        <View style={styles.buttonContainer}>
-          <Button theme='right-arrow' onPress={upOne} />
-        </View>
-        <View style={styles.bottomRow}>
-          <Button theme='backButton' onPress={goBack} />
-        </View>
-      </View>
-    );
-  } else if (index > 0 && index < 7) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{pictureTitles[index]}</Text>
-        {pictures[index] ? (
-          isPlotted ? (
+        <View style={styles.container}>
+            <View>
+                <Text style={[styles.text, styles.header]}>{pictureTitles[index]}</Text>
+            </View>
+            <View style={styles.line}></View>
+            {pictures[index] ? (
+            isPlotted ? (
             <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${BWPictures[index]}` }} />
-          ) : (
-            <Image style={styles.image} resizeMode='contain' source={{ uri: pictures[index] }} />
-          )
-        ) : (
-          <Image style={styles.image} resizeMode='contain' source={noPic} />
-        )}
-        <View style={styles.buttonContainer}>
-          <Button theme='left-arrow' onPress={downOne} />
-          <Button theme='right-arrow' onPress={upOne} />
-        </View>
-        <View style={styles.bottomRow}>
-          <Button theme='backButton' onPress={goBack} />
-        </View>
-      </View>
-    );
-  } else {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{pictureTitles[index]}</Text>
-        {video ? (
-          <View style={styles.videoContainer}>
-            {!isPlotted ? (
-            <Video style={styles.video} resizeMode='contain' useNativeControls source={{ uri: video }} />
             ) : (
-              <Video style={styles.video} resizeMode='contain' useNativeControls source={plotted_video_src} />
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[index] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
-          </View>
-        ) : (
-          <Image style={styles.image} resizeMode='contain' source={noPic} />
-        )}
-        <View style={styles.buttonContainer}>
-          <Button theme='left-arrow' onPress={downOne} />
+            <View style={styles.oneArrowContainer}>
+                <Button theme = "rightArrow" label="->" onPress={upOne} />
+                <Button theme={'homeButton'} label="BACK TO VIDEO" onPress={goBack} />
+            </View>    
         </View>
-        <View style={styles.bottomRow}>
-          {!isPlotted ? (
-            <Button label='Plot points' onPress={plotPoints} />
-          ) : (
-            <><Button label='revert' onPress={revert} /><Button label='continue' onPress={toDataScreen} /></>
-          )}
-          <Button theme='backButton' onPress={goBack} />
-        </View>
-      </View>
     );
-  }
+}
+else if (index > 0 && index < 7) {
+    return (
+        <View style={styles.container}>
+            <View>
+                <Text style={[styles.text, styles.header]}>{pictureTitles[index]}</Text>
+            </View>
+            <View style={styles.line}></View>
+            {pictures[index] ? (
+            isPlotted ? (
+            <Image style={styles.image} resizeMode = "cover" source={{ uri: `data:image/jpeg;base64,${BWPictures[index]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[index] }} />
+            )
+            ) : (
+          <Image style={styles.image} resizeMode='cover' source={noPic} />
+        )}
+            <View style={styles.buttonContainer}>
+                <View style={styles.rowContainer}>
+                    <Button theme = "rightArrow" label="<-" onPress={downOne} />
+                    <Button theme = "rightArrow" label="->" onPress={upOne} />
+                </View>
+                <Button theme={'homeButton'} label="BACK TO VIDEO" onPress={goBack} />
+            </View>    
+        </View>
+    );
+}
+else {
+    return (
+        <View style={styles.container}>
+            <View>
+                <Text style={[styles.text, styles.header]}>{pictureTitles[index]}</Text>
+            </View>
+            <View style={styles.line}></View>
+            {video ? (
+            !isPlotted ? (
+            <Video style={styles.image} resizeMode='cover' useNativeControls source={{ uri: video }} />
+            ) : (
+            <Video style={styles.image} resizeMode='cover' useNativeControls source={plotted_video_src} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.oneArrowContainer}>
+                <Button theme = "rightArrow" label="<-" onPress={downOne} />
+                {!isPlotted ? (
+                <Button theme = "homeButton" label="PLOT POINTS" onPress={plotPoints} />
+                ) : (
+                <Button theme = "homeButton" label="VIEW DATA" onPress={toDataScreen} />
+                )}
+            </View>    
+        </View>
+    );
+}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'gray',
-  },
-  imageContainer: {
-    width: 300,
-    height: 600,
-  },
-  videoContainer: {
-    width: 250,
-    height: 500,
-  },
-  video: {
-    width: 250,
-    height: 500,
-  },
-  image: {
-    width: 300,
-    height: 600,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginTop: 40,
-    width: 450,
-    alignContent: 'center',
-    justifyContent: 'space-evenly',
-  },
-  bottomRow: {
-    width: 350,
-    justifyContent: 'space-evenly',
-    alignContent: 'center',
-  },
-  text: {
-    fontSize: 30,
-  },
+    container: {
+        flex: 1,
+        alignContent: 'center'
+    },
+    rowContainer: {
+        minHeight: '10%',
+        flexDirection: 'row',
+        marginBottom: -55
+    },
+    line: {
+        borderBottomColor: '#00419D',
+        borderBottomWidth: '3%'
+    },
+    text: {
+        fontFamily: 'Arial',
+        color: '#00419D'
+    },
+    header: {
+        fontWeight: 'bold',
+        fontSize: '30%',
+        paddingTop: '12.5%',
+        paddingBottom: '2%',
+        textAlign: 'center',
+    },
+    image: {
+        position: 'static',
+        top: '-9%',
+        marginTop: '25%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        borderWidth: 3,
+        borderColor: '#00419D',
+        width: 350,
+        height: 622
+      },
+      oneArrowContainer: {
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: '85%',
+        left: 0,
+        right: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        
+      },
+      buttonContainer: {
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: '88%',
+        left: 0,
+        right: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+      }
 });
 
-export default PhotoVideoPreview;
+export default PhotoVideoPreview2;

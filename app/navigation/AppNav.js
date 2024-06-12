@@ -23,6 +23,8 @@ import { AuthContext } from '../context/AuthContext';
 import HomeScreen2 from '../screens/HomeScreen2';
 import SessionMenu from '../screens/SessionMenu';
 import PicturePreview2 from '../screens/PicturePreviewScreen2';
+import PhotoVideoPreview2 from '../screens/PhotoVideoPreviewScreen2';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -42,7 +44,7 @@ const AppNav = () => {
             {/* {userToken !== null ?  */}
             <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="Home" component={HomeScreen2} />
-                <Stack.Screen name="Camera" component={CameraScreen} />
+                <Stack.Screen name="Camera" component={CameraScreen} /> 
                 <Stack.Screen name="Test" component={TestScreen} />
                 <Stack.Screen name="ITScreen" component={ImageTestScreen} />
                 <Stack.Screen name="genericImageTest" component={GenericImageTestScreen} />
@@ -51,7 +53,7 @@ const AppNav = () => {
                 <Stack.Screen name="PicturePreview" component={PicturePreview2} />
                 <Stack.Screen name="VideoScreen" component={VideoScreen} />
                 {/* <Stack.Screen name="VideoPreview" component={VideoPreview} /> */}
-                <Stack.Screen name="PhotoVideoPreview" component={PhotoVideoPreview} />
+                <Stack.Screen name="PhotoVideoPreview" component={PhotoVideoPreview2} />
                 <Stack.Screen name="DataScreen" component={DataScreen} />
                 <Stack.Screen name="SavedSessions" component={SavedSessionsScreen} />
                 <Stack.Screen name="SavedDates" component={SavedDatesScreen} />
