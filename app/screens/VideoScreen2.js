@@ -5,7 +5,7 @@ import { Video } from 'expo-av';
 import * as MediaLibrary from 'expo-media-library';
 import Button from '../../components/Button';
 
-function VideoScreen({ navigation, route }) {
+function VideoScreen2({ navigation, route }) {
   const [isRecording, setIsRecording] = useState(false);
   const [video, setVideo] = useState(undefined);
   const [hasMicrophonePermission, setHasMicrophonePermission] = useState();
@@ -27,8 +27,8 @@ function VideoScreen({ navigation, route }) {
     setIsRecording(true);
     const options = {
       quality: '1080p',
-      maxDuration: 1, //Max length of video (seconds)
-      mute: true,
+      maxDuration: 2, //Max length of video (seconds)
+      mute: false,
     };
     try {
       const recordedVideo = await cameraRef.current.recordAsync(options);
@@ -72,6 +72,7 @@ function VideoScreen({ navigation, route }) {
     };
     return (
       <SafeAreaView style={styles.container}>
+        <Text style={styles.directionsText}>Video</Text>
         <Video
           style={styles.video}
           source={{ uri: video.uri }}
@@ -89,14 +90,15 @@ function VideoScreen({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.directionsText}>Video</Text>
       <View style={styles.cameraContainer}>
         <CameraView style={styles.camera} facing={cameraType} ref={cameraRef} mode="video">
-          <Image
-            style={styles.faceImage}
-            source={require('../assets/face-outline.png')}
-            resizeMode='cover'
-          />
           <View style={styles.buttonContainer}>
+            <Button theme='backButton' onPress={goBack} />
+            <Button
+              theme={isRecording ? 'stopRecording' : 'startRecording'}
+              onPress={isRecording ? stopRecording : recordVideo}
+            />
             <Button
               theme="flipCam"
               style = {styles.flipButton}
@@ -109,11 +111,6 @@ function VideoScreen({ navigation, route }) {
               }
             >
             </Button>
-            <Button
-              theme={isRecording ? 'stopRecording' : 'startRecording'}
-              onPress={isRecording ? stopRecording : recordVideo}
-            />
-            <Button theme='backButton' onPress={goBack} />
           </View>
         </CameraView>
       </View>
@@ -130,7 +127,7 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     position: 'absolute',
     bottom: 40,
     width: '100%',
@@ -161,7 +158,7 @@ const styles = StyleSheet.create({
   },
   previewButtonContainer: {
     position: 'absolute',
-    top: '87%',
+    top: '81%',
     width: 450,
     flexDirection: 'row',
     backgroundColor: 'black',
@@ -179,6 +176,12 @@ const styles = StyleSheet.create({
   video: {
     flex: 1,
     alignSelf: 'stretch',
+  },
+  directionsText:{
+    color: 'black',
+    fontSize: '30%',
+    fontFamily: 'Arial',
+    color: 'white',
   },
   faceImage: {
     position: 'absolute',
@@ -201,4 +204,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VideoScreen;
+export default VideoScreen2;

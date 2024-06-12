@@ -271,7 +271,7 @@ export default function Button({ label, theme, onPress }) {
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Save to Camera Roll Button'>
       <Ionicons
           name = "download-outline"
-          size = {55}
+          size = {100}
           color = "white"
           style = {styles.buttonIcon}/>
       </Pressable>
@@ -286,7 +286,7 @@ export default function Button({ label, theme, onPress }) {
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Start recording button'>
       <FontAwesome
           name = "play-circle-o"
-          size = {65}
+          size = {100}
           color = "green"
           style = {styles.buttonIcon}/>
       </Pressable>
@@ -301,7 +301,7 @@ export default function Button({ label, theme, onPress }) {
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Stop recording button'>
       <FontAwesome
           name = "stop-circle-o"
-          size = {65}
+          size = {100}
           color = "red"
           style = {styles.buttonIcon}/>
       </Pressable>
@@ -422,8 +422,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   psButtonContainer:{
-    width: 60,
-    height: 60,
+    width: '50%',
+    height: '130%',
     alignItems: 'center',
     alignSelf: 'flex-end',
     justifyContent: 'center',

@@ -25,6 +25,7 @@ import SessionMenu from '../screens/SessionMenu';
 import PicturePreview2 from '../screens/PicturePreviewScreen2';
 import PhotoVideoPreview2 from '../screens/PhotoVideoPreviewScreen2';
 import CameraScreen3 from '../screens/CameraScreen3';
+import VideoScreen2 from '../screens/VideoScreen2';
 
 
 
@@ -52,7 +53,7 @@ const AppNav = () => {
                 <Stack.Screen name="SevenPhoto" component={SessionMenu} />
                 <Stack.Screen name="Camera2" component={CameraScreen3} />
                 <Stack.Screen name="PicturePreview" component={PicturePreview2} />
-                <Stack.Screen name="VideoScreen" component={VideoScreen} />
+                <Stack.Screen name="VideoScreen" component={VideoScreen2} />
                 {/* <Stack.Screen name="VideoPreview" component={VideoPreview} /> */}
                 <Stack.Screen name="PhotoVideoPreview" component={PhotoVideoPreview2} />
                 <Stack.Screen name="DataScreen" component={DataScreen} />
