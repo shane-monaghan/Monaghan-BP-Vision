@@ -1,5 +1,6 @@
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { AntDesign, Entypo } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function Button({ label, theme, onPress }) {
@@ -130,9 +131,9 @@ export default function Button({ label, theme, onPress }) {
     return(
       <View style={styles.pictureButtonContainer}>
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Take Picture Button'>
-      <FontAwesome
-          name = "dot-circle-o"
-          size = {55}
+      <Entypo
+          name = "circle"
+          size = {100}
           color = "white"
           style = {styles.buttonIcon}/>
       </Pressable>
@@ -147,7 +148,7 @@ export default function Button({ label, theme, onPress }) {
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Switch to Front or Back Camera Button'>
       <Ionicons
           name = "sync-circle-outline"
-          size = {55}
+          size = {70}
           color = "white"
           style = {styles.buttonIcon}/>
       </Pressable>
@@ -160,8 +161,8 @@ export default function Button({ label, theme, onPress }) {
     return(
       <View style={styles.pictureButtonContainer}>
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Go back to previous screen'>
-      <Ionicons
-          name = "ios-return-up-back"
+      <AntDesign
+          name = "closecircleo"
           size = {55}
           color = "white"
           style = {styles.buttonIcon}/>
@@ -176,8 +177,8 @@ export default function Button({ label, theme, onPress }) {
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Go back to previous screen'>
       <Ionicons
           name = "checkbox"
-          size = {55}
-          color = "white"
+          size = {100}
+          color = "green"
           style = {styles.buttonIcon}/>
       </Pressable>
     </View>
@@ -206,8 +207,8 @@ export default function Button({ label, theme, onPress }) {
       <Pressable style={styles.button} onPress= {onPress} accessible={true} accessibilityLabel='Delete Photo Button'>
       <Ionicons
           name = "trash"
-          size = {55}
-          color = "white"
+          size = {100}
+          color = "red"
           style = {styles.buttonIcon}/>
       </Pressable>
     </View>
@@ -434,8 +435,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   pictureButtonContainer:{
-    width: 60,
-    height: 60,
+    width: '50%',
+    height: '130%',
     alignItems: 'center',
     alignSelf: 'flex-end',
     justifyContent: 'center',
