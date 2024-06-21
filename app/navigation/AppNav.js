@@ -26,6 +26,7 @@ import PicturePreview2 from '../screens/PicturePreviewScreen2';
 import PhotoVideoPreview2 from '../screens/PhotoVideoPreviewScreen2';
 import CameraScreen3 from '../screens/CameraScreen3';
 import VideoScreen2 from '../screens/VideoScreen2';
+import DataScreen3 from '../screens/DataScreen3';
 
 
 
@@ -45,18 +46,20 @@ const AppNav = () => {
         <NavigationContainer>
             {/* {userToken !== null ?  */}
             <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+                {/* FINISHED */}
                 <Stack.Screen name="Home" component={HomeScreen2} />
-                <Stack.Screen name="Camera" component={CameraScreen} /> 
-                <Stack.Screen name="Test" component={TestScreen} />
-                <Stack.Screen name="ITScreen" component={ImageTestScreen} />
-                <Stack.Screen name="genericImageTest" component={GenericImageTestScreen} />
+                {/* FINISHED */}
                 <Stack.Screen name="SevenPhoto" component={SessionMenu} />
+                {/* FINISHED */}
                 <Stack.Screen name="Camera2" component={CameraScreen3} />
+                {/* FINISHED */}
                 <Stack.Screen name="PicturePreview" component={PicturePreview2} />
+                {/* FINISHED */}
                 <Stack.Screen name="VideoScreen" component={VideoScreen2} />
-                {/* <Stack.Screen name="VideoPreview" component={VideoPreview} /> */}
+                {/* FINISHED */}
                 <Stack.Screen name="PhotoVideoPreview" component={PhotoVideoPreview2} />
-                <Stack.Screen name="DataScreen" component={DataScreen} />
+
+                <Stack.Screen name="DataScreen" component={DataScreen3} />
                 <Stack.Screen name="SavedSessions" component={SavedSessionsScreen} />
                 <Stack.Screen name="SavedDates" component={SavedDatesScreen} />
                 <Stack.Screen name="DataScreen2" component={DataScreen2} />

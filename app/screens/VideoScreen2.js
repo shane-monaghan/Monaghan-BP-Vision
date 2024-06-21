@@ -27,7 +27,7 @@ function VideoScreen2({ navigation, route }) {
     setIsRecording(true);
     const options = {
       quality: '1080p',
-      maxDuration: 2, //Max length of video (seconds)
+      maxDuration: 1, //Max length of video (seconds)
       mute: false,
     };
     try {

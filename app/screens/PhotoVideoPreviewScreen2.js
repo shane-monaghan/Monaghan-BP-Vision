@@ -142,6 +142,15 @@ function PhotoVideoPreview2({ navigation, route }) {
     setBWPictures([null, null, null, null, null, null, null]);
   };
 
+  const toDataScreen = async () => {
+    navigation.navigate("DataScreen", {
+      originalPictures: pictures,
+      pictures: BWPictures,
+      name: route.params.name,
+      date: route.params.date,
+    });
+  };
+
   if (index == 0) {
     return (
         <View style={styles.container}>
@@ -265,7 +274,6 @@ const styles = StyleSheet.create({
         right: 0,
         marginLeft: 'auto',
         marginRight: 'auto',
-        
       },
       buttonContainer: {
         position: 'absolute',
