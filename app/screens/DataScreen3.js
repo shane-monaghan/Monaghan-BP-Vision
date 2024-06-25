@@ -35,7 +35,7 @@ function DataScreen3({ navigation, route }) {
     'Wrinkling of the Nose',
     'Pursed Lips',
     'Big Smile',
-    'Video',
+    'End of Session',
   ];
   const plotted_video_src = require("../../pythonStuff/plottedVid.mov");
 
@@ -261,8 +261,16 @@ function DataScreen3({ navigation, route }) {
   else {
     return (
         <View style={styles.container}>
-            <Text style={[styles.text, styles.header]}>{pictureTitles[index]}</Text>
-            <View style={styles.line}></View>
+          <View style={styles.endScreen}>
+            <Text style={[styles.text, styles.header]}>
+              Thank you for using           BP Vision!
+            </Text>
+          <View style={styles.buttonContainer2}>
+            <Button theme = "saveSession" label="Save Session" onPress={saveSession}/>
+            <Button theme="endHomeButton" label="Return Home" onPress = {toHome}/>
+            <Button theme = "homeButton" label="<-" onPress={downOne} />
+          </View>
+          </View>
         </View>
     )
   }
@@ -273,6 +281,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center',
         backgroundColor: 'white'
+    },
+    endScreen: {
+      flex: 1,
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      top: '30%',
+      justifyContent: 'space-evenly'
     },
     line: {
         borderBottomColor: '#00419D',
@@ -325,6 +343,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         top: '91%',
+        left: 0,
+        right: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+      },
+      buttonContainer2: {
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        top: '100%',
         left: 0,
         right: 0,
         marginLeft: 'auto',

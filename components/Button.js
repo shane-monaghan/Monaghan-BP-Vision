@@ -56,15 +56,15 @@ export default function Button({ label, theme, onPress }) {
     return(
       <View style = {[styles.buttonContainer, {borderWidth: 0, borderColor: "black", borderRadius: 15}]}>
         <Pressable 
-        style = {[styles.button, {backgroundColor: "white"}]}
+        style = {[styles.button, {backgroundColor: "#00419D"}]}
         onPress = {onPress}
         >
           <FontAwesome
           name = "save"
           size = {18}
-          color = "black"
+          color = "white"
           style = {styles.buttonIcon}/>
-          <Text style = {[styles.buttonLabel, {color: "black"}]}>{label}</Text>
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>
         </Pressable>
       </View>
     )
@@ -106,6 +106,23 @@ export default function Button({ label, theme, onPress }) {
         style = {[styles.button, {backgroundColor: "#00419D"}]}
         onPress = {onPress}
         >
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>
+        </Pressable>
+      </View>
+    )
+  }
+  else if (theme === "endHomeButton"){
+    return(
+      <View style = {styles.sessionMenuButtonContainer}>
+        <Pressable 
+        style = {[styles.button, {backgroundColor: "#00419D"}]}
+        onPress = {onPress}
+        >
+          <AntDesign
+          name = "home"
+          size = {18}
+          color = "white"
+          style = {styles.buttonIcon}/>
           <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>
         </Pressable>
       </View>
