@@ -6,7 +6,7 @@ import { Video } from 'expo-av';
 import axios from 'axios';
 import * as FileSystem from 'expo-file-system';
 
-const noPic = require('../assets/images/noImageUploaded.png');
+const noPic = require('../assets/images/imageNotFound.jpg');
 
 function DataScreen3({ navigation, route }) {
   const { pictures } = route.params;

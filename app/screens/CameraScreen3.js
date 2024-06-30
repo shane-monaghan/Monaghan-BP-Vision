@@ -7,7 +7,6 @@ import * as MediaLibrary from 'expo-media-library'
 import { useNavigation } from '@react-navigation/native';
 import { useCameraPermissions } from 'expo-image-picker';
 
-
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
@@ -57,7 +56,13 @@ export default function CameraScreen3({navigation, route}) {
     const updatedPictures = [...route.params.pictures];
     updatedPictures[index] = photo.uri;
     route.params.setPictures(updatedPictures);
-    navigation.goBack();
+    // navigation.goBack();
+    navigation.navigate('SevenPhoto', {
+      videoUri: route.params.videoUri,
+      pictures: updatedPictures,
+      name: route.params.name,
+      date: route.params.date
+    })
   }
 
   //If a photo has been taken, switch from camera taking screen to photo management

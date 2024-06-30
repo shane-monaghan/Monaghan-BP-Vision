@@ -4,8 +4,8 @@ import Button from '../../components/Button';
 import * as ImagePicker from 'expo-image-picker';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
-function SessionMenu({ navigation }) {
-  const [boxStates, setBoxStates] = useState([false, false, false, false, false, false, false]);
+function SessionMenu({ navigation, route }) {
+  const [boxStates, setBoxStates] = useState([false, false, false, false, false, false, false, false]);
   const customTexts = [
     'Face at Rest',
     'Eyes Closed Gently',
@@ -14,8 +14,10 @@ function SessionMenu({ navigation }) {
     'Wrinkling of the Nose',
     'Pursed Lips',
     'Big Smile',
+    'Video',
   ];
   const [pictures, setPictures] = useState([null, null, null, null, null, null, null]);
+  const [video, setVideo] = useState(undefined)
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
 
@@ -29,6 +31,15 @@ function SessionMenu({ navigation }) {
     navigation.navigate('Home');
   }
 
+  const toPhotoVideoPreview = () => {
+    navigation.navigate('PhotoVideoPreview', {
+      videoUri: route.params ? route.params.videoUri : undefined,
+      pictures: route.params.pictures,
+      name: route.params.name,
+      date: route.params.date,
+    });
+  };
+
   const pickImageAsync = async (index) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
@@ -36,34 +47,65 @@ function SessionMenu({ navigation }) {
     });
 
     //If a picture is not selected, let the user know
-    if (!result.cancelled) {
+    if (result.assets) {
       const updatedPictures = [...pictures];
       updatedPictures[index] = result.assets[0].uri;
       setPictures(updatedPictures);
     } else {
-      alert('You did not select an image');
+      Alert.alert('Alert', 'You did not select an image',
+      [
+        {
+          text: 'Acknowledge',
+          onPress: () => {
+            console.log('Acknowledged')
+          }
+        }
+      ]
+      );
+      
     }
   };
 
   const toggleBoxAndNavigate = (index) => {
-    Alert.alert(
-      'Option',
-      'Would you like to take a new picture or upload from your camera roll',
-      [
-        {
-          text: 'Take Photo',
-          onPress: () => {
-            navigation.navigate('Camera2', { index, customText: customTexts[index], setPictures: setPictures, pictures: pictures });
+    if (index >= 0 && index < 7) {
+      Alert.alert(
+        'Option',
+        'Would you like to take a new picture or upload from your camera roll',
+        [
+          {
+            text: 'Take Photo',
+            onPress: () => {
+              navigation.navigate('Camera2', { index, customText: customTexts[index], setPictures: setPictures, pictures: pictures });
+            },
           },
-        },
-        {
-          text: 'Upload Photo',
-          onPress: () => {
-            pickImageAsync(index);
+          {
+            text: 'Upload Photo',
+            onPress: () => {
+              pickImageAsync(index);
+            },
           },
-        },
-      ]
-    );
+        ]
+      );
+    }
+    else {
+      Alert.alert('Option', 'Would you like to record a new video?',
+        [
+          {
+            text: 'Take Video',
+            onPress: () => {
+              toVideo(pictures)
+            }
+          },
+          {
+            text: 'Cancel',
+            onPress: () => {
+              console.log("Video Cancelled")
+            }
+          }
+        ]
+      );
+    }
+    
     const updatedBoxStates = [...boxStates];
     updatedBoxStates[index] = true;
     setBoxStates(updatedBoxStates);
@@ -74,7 +116,7 @@ function SessionMenu({ navigation }) {
   };
 
   const toVideo = (pictures) => {
-    navigation.navigate('VideoScreen', { pictures: pictures, name: name, date: date });
+    navigation.navigate('VideoScreen', { pictures: pictures, name: name, date: date, setVideo: setVideo, video: video });
   };
 
   return (
@@ -98,7 +140,7 @@ function SessionMenu({ navigation }) {
             value={date} 
             onChangeText={(text) => setDate(text)}
             />
-            <Text style={[styles.text, styles.subheader, styles.pictureHead]}>Pictures:</Text>
+            <Text style={[styles.text, styles.subheader, styles.pictureHead]}>Content:</Text>
         </View>
         <View style={styles.contentContainer}>
             {boxStates.map((isChecked, index) => (
@@ -108,14 +150,14 @@ function SessionMenu({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                 style={[styles.box, isChecked ? styles.checkedBox : null]}
-                onPress={() => toggleBox(index)}
+                onPress={() => toggleBoxAndNavigate(index)}
                 />
             </View>
             ))}
         </View>
         <View style={styles.recordVideoContainer}>
-            <Button theme={'recordVideo'} label="RECORD VIDEO" onPress={() => toVideo(pictures)} />
-            <Button theme="previewButton" label="PREVIEW PICTURES" onPress={() => toPreview(pictures)} />
+            {/*<Button theme={'recordVideo'} label="RECORD VIDEO" onPress={() => toVideo(pictures)} />*/}
+            <Button theme="previewButton" label="PREVIEW" onPress={toPhotoVideoPreview} />
             <Button theme={'homeButton'} label="RETURN HOME" onPress={toHome} />
         </View>
     </View>
@@ -201,7 +243,7 @@ styles = StyleSheet.create({
     },
     recordVideoContainer: {
         positon: 'absolute',
-        top: '25%',
+        top: '30%',
         marginLeft: 'auto',
         marginRight: 'auto'
     },

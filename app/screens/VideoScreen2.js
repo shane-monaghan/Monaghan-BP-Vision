@@ -53,6 +53,15 @@ function VideoScreen2({ navigation, route }) {
     navigation.goBack();
   };
 
+  const transferVideo = () => {
+    navigation.navigate('SevenPhoto', {
+      videoUri: video.uri,
+      pictures: route.params.pictures,
+      name: route.params.name,
+      date: route.params.date
+    })
+  }
+
   const toPhotoVideoPreview = () => {
     navigation.navigate('PhotoVideoPreview', {
       videoUri: video.uri,
@@ -82,7 +91,7 @@ function VideoScreen2({ navigation, route }) {
         <View style={styles.previewButtonContainer}>
           <Button theme='trash' onPress={() => setVideo(undefined)} />
           <Button theme='savePhoto' onPress={saveVideo} />
-          <Button theme='checkbox' onPress={toPhotoVideoPreview} />
+          <Button theme='checkbox' onPress={transferVideo} />
         </View>
       </SafeAreaView>
     );

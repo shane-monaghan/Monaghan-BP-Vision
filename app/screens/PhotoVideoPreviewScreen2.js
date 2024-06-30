@@ -67,16 +67,13 @@ function PhotoVideoPreview2({ navigation, route }) {
     console.log("Starting");
     const startTime = new Date()
     for (let i = 0; i < 7; i++) {
-      if (pictures[i] == null){
-        alert("Missing Photo \""+ pictureTitles[i]+ "\" Please take all photos before continuing");
-        return;
-      }
-      await plotImage(pictures[i], i);
-
-      if (!video){
-        return;
+      if (pictures[i] != null){
+        // alert("Missing Photo \""+ pictureTitles[i]+ "\" Please take all photos before continuing");
+        // return;
+        await plotImage(pictures[i], i);
       }
     }
+    if (video) {
       try {
         console.log("Starting Video");
         const videoURI = video;
@@ -97,11 +94,12 @@ function PhotoVideoPreview2({ navigation, route }) {
         const seconds = elapsedSeconds % 60;
 
         console.log("Elapsed time:", minutes, "minutes", seconds, "seconds");
-        setIsPlotted(true);
         //navigation.navigate("DataScreen", {pictures: BWPictures})
       } catch (error) {
         console.error('Error converting video:', error);
       }
+    }
+    setIsPlotted(true);
   }
 
   // const convertToBlackAndWhite = async () => {
@@ -169,7 +167,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             )}
             <View style={styles.oneArrowContainer}>
                 <Button theme = "rightArrow" label="->" onPress={upOne} />
-                <Button theme={'homeButton'} label="BACK TO VIDEO" onPress={goBack} />
+                <Button theme={'homeButton'} label="SESSION MENU" onPress={goBack} />
             </View>    
         </View>
     );
@@ -195,7 +193,7 @@ else if (index > 0 && index < 7) {
                     <Button theme = "rightArrow" label="<-" onPress={downOne} />
                     <Button theme = "rightArrow" label="->" onPress={upOne} />
                 </View>
-                <Button theme={'homeButton'} label="BACK TO VIDEO" onPress={goBack} />
+                <Button theme={'homeButton'} label="SESSION MENU" onPress={goBack} />
             </View>    
         </View>
     );
