@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, Text } from 'react-native';
 import Button from '../../components/Button';
 import { Video } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
+import { useProcessedImages } from '../navigation/CreateContext';
 import axios from 'axios';
 
 
@@ -11,6 +12,7 @@ const noPic = require('../assets/images/imageNotFound.jpg');
 function PhotoVideoPreview2({ navigation, route }) {
   const { pictures } = route.params;
   const [BWPictures, setBWPictures] = useState([null, null, null, null, null, null, null]);
+  const { processedImages, setProcessedImages } = useProcessedImages();
   // const flaskURL = 'http://134.82.182.163:5000/'; //SCHOOL
   // const flaskURL = 'http://192.168.12.126:5000/'; // HOME
   // const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
@@ -157,8 +159,8 @@ function PhotoVideoPreview2({ navigation, route }) {
             </View>
             <View style={styles.line}></View>
             {pictures[index] ? (
-            isPlotted ? (
-            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${BWPictures[index]}` }} />
+            processedImages[index] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[index]}` }} />
             ) : (
             <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[index] }} />
             )
@@ -180,8 +182,8 @@ else if (index > 0 && index < 7) {
             </View>
             <View style={styles.line}></View>
             {pictures[index] ? (
-            isPlotted ? (
-            <Image style={styles.image} resizeMode = "cover" source={{ uri: `data:image/jpeg;base64,${BWPictures[index]}` }} />
+            processedImages[index] ? (
+            <Image style={styles.image} resizeMode = "cover" source={{ uri: `data:image/jpeg;base64,${processedImages[index]}` }} />
             ) : (
             <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[index] }} />
             )

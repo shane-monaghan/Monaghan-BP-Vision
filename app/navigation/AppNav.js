@@ -18,6 +18,7 @@ import DataScreen from '../screens/DataScreen';
 import SavedSessionsScreen from '../screens/SavedSessionsScreen';
 import SavedDatesScreen from '../screens/SavedDatesScreen';
 import DataScreen2 from '../screens/DataScreen2';
+import { ProcessedImagesProvider } from './CreateContext';
 
 import { AuthContext } from '../context/AuthContext';
 import HomeScreen2 from '../screens/HomeScreen2';
@@ -27,6 +28,8 @@ import PhotoVideoPreview2 from '../screens/PhotoVideoPreviewScreen2';
 import CameraScreen3 from '../screens/CameraScreen3';
 import VideoScreen2 from '../screens/VideoScreen2';
 import DataScreen3 from '../screens/DataScreen3';
+import FinalHomeScreen from '../screens/FinalHomeScreen';
+import FinalPatientInfoScreen from '../screens/FinalPatientInfoScreen';
 
 
 
@@ -43,34 +46,38 @@ const AppNav = () => {
         )
     }
     return (
-        <NavigationContainer>
-            {/* {userToken !== null ?  */}
-            <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-                {/* FINISHED */}
-                <Stack.Screen name="Home" component={HomeScreen2} />
-                {/* FINISHED */}
-                <Stack.Screen name="SevenPhoto" component={SessionMenu} />
-                {/* FINISHED */}
-                <Stack.Screen name="Camera2" component={CameraScreen3} />
-                {/* FINISHED */}
-                <Stack.Screen name="PicturePreview" component={PicturePreview2} />
-                {/* FINISHED */}
-                <Stack.Screen name="VideoScreen" component={VideoScreen2} />
-                {/* FINISHED */}
-                <Stack.Screen name="PhotoVideoPreview" component={PhotoVideoPreview2} />
+        <ProcessedImagesProvider>
+            <NavigationContainer>
+                {/* {userToken !== null ?  */}
+                <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+                    {/* FINISHED */}
+                    <Stack.Screen name="Home" component={HomeScreen2} />
+                    {/* FINISHED */}
+                    <Stack.Screen name="PatientInfo" component={FinalPatientInfoScreen} />
 
-                <Stack.Screen name="DataScreen" component={DataScreen3} />
-                <Stack.Screen name="SavedSessions" component={SavedSessionsScreen} />
-                <Stack.Screen name="SavedDates" component={SavedDatesScreen} />
-                <Stack.Screen name="DataScreen2" component={DataScreen2} />
-            </Stack.Navigator> 
-            {/* :
+                    <Stack.Screen name="SevenPhoto" component={SessionMenu} />
+                    {/* FINISHED */}
+                    <Stack.Screen name="Camera2" component={CameraScreen3} />
+                    {/* FINISHED */}
+                    <Stack.Screen name="PicturePreview" component={PicturePreview2} />
+                    {/* FINISHED */}
+                    <Stack.Screen name="VideoScreen" component={VideoScreen2} />
+                    {/* FINISHED */}
+                    <Stack.Screen name="PhotoVideoPreview" component={PhotoVideoPreview2} />
 
-            //Set initial route to "Login" to use login screen
-             <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Login" component={LoginScreen} />
-             </Stack.Navigator>} */}
-      </NavigationContainer>
+                    <Stack.Screen name="DataScreen" component={DataScreen3} />
+                    <Stack.Screen name="SavedSessions" component={SavedSessionsScreen} />
+                    <Stack.Screen name="SavedDates" component={SavedDatesScreen} />
+                    <Stack.Screen name="DataScreen2" component={DataScreen2} />
+                </Stack.Navigator> 
+                {/* :
+
+                //Set initial route to "Login" to use login screen
+                    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={LoginScreen} />
+                    </Stack.Navigator>} */}
+            </NavigationContainer>
+        </ProcessedImagesProvider>
     )
 }
 

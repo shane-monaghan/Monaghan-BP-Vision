@@ -4,14 +4,19 @@ import { StyleSheet, Text, View, SafeAreaView, Image, Dimensions } from 'react-n
 import Button from '../../components/Button';
 import * as MediaLibrary from 'expo-media-library'
 // // import * as FaceDetectorConstants from 'expo-face-detector';
+import { useProcessedImages } from '../navigation/CreateContext';
 import { useNavigation } from '@react-navigation/native';
 import { useCameraPermissions } from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import axios from 'axios';
 
 const windowWidth = Dimensions.get('screen').width;
 const windowHeight = Dimensions.get('screen').height;
 
 
 export default function CameraScreen3({navigation, route}) {
+  const flaskURL = 'http://134.82.187.57:5000/';
+  const { processedImages, setProcessedImages } = useProcessedImages();
   const [type, setType] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [mediaLibraryPermission, requestMediaLibraryPermission] = useState();
@@ -34,6 +39,29 @@ export default function CameraScreen3({navigation, route}) {
   //     flash === FlashMode.off? FlashMode.on: FlashMode.off
   //   );
   // }
+
+  const plotImage = async (uri, index) => {
+    try {
+      const imageURI = uri; // Original URI of selected image
+      const imageBase64 = await FileSystem.readAsStringAsync(imageURI, {
+        encoding: FileSystem.EncodingType.Base64,
+      }); // Read the selected image file as a base64-encoded string
+
+      // Paste Here
+
+      const response = await axios.post(flaskURL + 'plotPoints', {
+        encoded_image: imageBase64,
+      }); // Send the base64-encoded image to the server for grayscale conversion
+      const base64_image = response.data.base64_image;
+      // setBWPictures(prevState => [...prevState.slice(0, index), base64_image, ...prevState.slice(index + 1)]);
+      const newProcessedImages = [...processedImages];
+      newProcessedImages[index] = [base64_image];
+      setProcessedImages(newProcessedImages);
+    } catch (error) {
+      console.log('Error sending image', error);
+    }
+    console.log("Finished Image: ", index + 1, "/ 7");
+  }
   
   //Takes photo
   let takePhoto = async () => {
@@ -57,6 +85,7 @@ export default function CameraScreen3({navigation, route}) {
     updatedPictures[index] = photo.uri;
     route.params.setPictures(updatedPictures);
     // navigation.goBack();
+    plotImage(updatedPictures[index], index);
     navigation.navigate('SevenPhoto', {
       videoUri: route.params.videoUri,
       pictures: updatedPictures,

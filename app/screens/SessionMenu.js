@@ -3,8 +3,13 @@ import { View, TouchableOpacity, StyleSheet, Text, Alert, TextInput } from 'reac
 import Button from '../../components/Button';
 import * as ImagePicker from 'expo-image-picker';
 import { Header } from 'react-native/Libraries/NewAppScreen';
+import { useProcessedImages } from '../navigation/CreateContext';
+import * as FileSystem from 'expo-file-system';
+import axios from 'axios';
 
 function SessionMenu({ navigation, route }) {
+  const flaskURL = 'http://134.82.187.57:5000/';
+  const { processedImages, setProcessedImages } = useProcessedImages();
   const [boxStates, setBoxStates] = useState([false, false, false, false, false, false, false, false]);
   const customTexts = [
     'Face at Rest',
@@ -32,13 +37,37 @@ function SessionMenu({ navigation, route }) {
   }
 
   const toPhotoVideoPreview = () => {
+    console.log(pictures)
     navigation.navigate('PhotoVideoPreview', {
       videoUri: route.params ? route.params.videoUri : undefined,
-      pictures: route.params.pictures,
-      name: route.params.name,
-      date: route.params.date,
+      pictures: route.params ? route.params.pictures : pictures,
+      name: route.params ? route.params.name : "",
+      date: route.params ? route.params.date : "",
     });
   };
+
+  const plotImage = async (uri, index) => {
+    try {
+      const imageURI = uri; // Original URI of selected image
+      const imageBase64 = await FileSystem.readAsStringAsync(imageURI, {
+        encoding: FileSystem.EncodingType.Base64,
+      }); // Read the selected image file as a base64-encoded string
+
+      // Paste Here
+
+      const response = await axios.post(flaskURL + 'plotPoints', {
+        encoded_image: imageBase64,
+      }); // Send the base64-encoded image to the server for grayscale conversion
+      const base64_image = response.data.base64_image;
+      // setBWPictures(prevState => [...prevState.slice(0, index), base64_image, ...prevState.slice(index + 1)]);
+      const newProcessedImages = [...processedImages];
+      newProcessedImages[index] = [base64_image];
+      setProcessedImages(newProcessedImages);
+    } catch (error) {
+      console.log('Error sending image', error);
+    }
+    console.log("Finished Image: ", index + 1, "/ 7");
+  }
 
   const pickImageAsync = async (index) => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -51,6 +80,7 @@ function SessionMenu({ navigation, route }) {
       const updatedPictures = [...pictures];
       updatedPictures[index] = result.assets[0].uri;
       setPictures(updatedPictures);
+      plotImage(updatedPictures[index], index);
     } else {
       Alert.alert('Alert', 'You did not select an image',
       [

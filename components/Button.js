@@ -9,11 +9,11 @@ export default function Button({ label, theme, onPress }) {
   if (theme === "toCameraScreen"){
     return(
         //What container, and alternate settings for that container
-        <View style = {[styles.buttonContainer, {borderWidth: 0, borderColor: "white", borderRadius: 15, margin: 30, marginTop: 85}]}
+        <View style = {[styles.buttonContainer, styles.shadowProp, {borderWidth: 0, borderColor: "white", borderRadius: 15, margin: 30, marginTop: 55}]}
     >
         {/* Declare the button is pressable */}
         <Pressable
-         style = {[styles.button, {backgroundColor: '#33ADF0'}]}
+         style = {[styles.button, {backgroundColor: '#4437D2'}]}
          onPress = {onPress}
          accessibilityLanguage='To Home'
          >
@@ -32,21 +32,37 @@ export default function Button({ label, theme, onPress }) {
     </View>
     );
   }
+  else if (theme === "newDefaultButton"){
+    return(
+        //What container, and alternate settings for that container
+        <View style = {[styles.newDefButContainer, styles.shadowProp, {borderWidth: 0, borderColor: "white", borderRadius: 15, margin: 30, marginTop: 0}]}
+    >
+        {/* Declare the button is pressable */}
+        <Pressable
+         style = {[styles.button, {backgroundColor: '#4437D2'}]}
+         onPress = {onPress}
+         accessibilityLanguage='Default Button'
+         >
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>  
+         </Pressable>
+    </View>
+    );
+  }
 
   //To gallery button
   else if (theme === "toGallery"){
     return(
-      <View style = {[styles.buttonContainer, {borderWidth: 0, borderColor: '#33ADF0', borderRadius: 15}]}>
+      <View style = {[styles.buttonContainer, styles.shadowProp, {borderWidth: 0, borderColor: '#33ADF0', borderRadius: 15}]}>
         <Pressable 
-        style = {[styles.button, {backgroundColor: "white"}]}
+        style = {[styles.button, {backgroundColor: "#4437D2"}]}
         onPress = {onPress}
         >
           <FontAwesome
           name = "picture-o"
           size = {18}
-          color = '#33ADF0'
+          color = 'white'
           style = {styles.buttonIcon}/>
-          <Text style = {[styles.buttonLabel, {color: '#33ADF0'}]}>{label}</Text>
+          <Text style = {[styles.buttonLabel, {color: 'white'}]}>{label}</Text>
         </Pressable>
       </View>
     )
@@ -388,6 +404,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 0,
   },
+  newDefButContainer: {
+    width: 280,
+    height: 50,
+    marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
+  },
   sessionMenuButtonContainer: {
     width: 320,
     height: 60,
@@ -472,6 +496,25 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color: '#fff',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'condensedBold',
+    fontFamily: "Verdana, sans-serif"
+  },
+  menuTopButton: {
+    fontFamily: "Verdana, sans-serif",
+    borderRadius: 10,
+    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+    backgroundColor: "#4437D2",
+    marginTop: 82,
+    width: "100%",
+    maxWidth: 291,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "18px 60px",
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
   },
 });

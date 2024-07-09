@@ -53,6 +53,23 @@ function VideoScreen2({ navigation, route }) {
     navigation.goBack();
   };
 
+  const plotVideo = async () => {
+    if (video) {
+      try {
+        console.log("Starting Video");
+        const videoURI = video;
+        const videoBase64 = await FileSystem.readAsStringAsync(videoURI, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+        const response = await axios.post(flaskURL + 'plotVideo', {
+          encoded_video: videoBase64,
+        });
+      } catch (error) {
+        console.error('Error converting video:', error);
+      }
+    }
+  } 
+
   const transferVideo = () => {
     navigation.navigate('SevenPhoto', {
       videoUri: video.uri,
