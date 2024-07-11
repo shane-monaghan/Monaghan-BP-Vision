@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import { useProcessedImages } from '../navigation/CreateContext';
 import * as FileSystem from 'expo-file-system';
+import Task from '../../components/Task';
 import axios from 'axios';
 
 function SessionMenu({ navigation, route }) {
@@ -22,6 +23,7 @@ function SessionMenu({ navigation, route }) {
     'Video',
   ];
   const [pictures, setPictures] = useState([null, null, null, null, null, null, null]);
+  const [showPatientInfo, setShowPatientInfo] = useState(1);
   const [video, setVideo] = useState(undefined)
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
@@ -33,6 +35,7 @@ function SessionMenu({ navigation, route }) {
   };
 
   function toHome() {
+    console.log(showPatientInfo);
     navigation.navigate('Home');
   }
 
@@ -149,7 +152,79 @@ function SessionMenu({ navigation, route }) {
     navigation.navigate('VideoScreen', { pictures: pictures, name: name, date: date, setVideo: setVideo, video: video });
   };
 
-  return (
+  if (showPatientInfo == 1) {
+    return (
+      <View style={styles.view1}>
+        <View style={[styles.view2, styles.shadowProp]}>
+          <Text style={styles.titleText}>SESSION INFO</Text>
+        </View>
+        <View style={styles.view3}>
+          <View style={styles.view4}>
+              <Text style={styles.subHeaderText}>Patient Name</Text>
+            <TextInput
+              style={[styles.view5, styles.shadowProp]}
+              placeholder="Patient Name"
+              value={name}
+              onChangeText={(text) => setName(text)}
+            />
+          </View>
+          <View style={styles.view6}>
+            <Text style={styles.subHeaderText}>Date</Text>
+            <TextInput
+              style={[styles.view5, styles.shadowProp]}
+              placeholder="Date"
+              value={date}
+              onChangeText={(date) => setDate(date)}
+            />
+          </View>
+          <View alignItems="center" marginTop="5%">
+              <Button theme="newDefaultButton" label="Next" onPress={() => setShowPatientInfo(2)}></Button>
+          </View>
+        </View>
+      </View>
+    );
+  }
+  else if (showPatientInfo == 2) {
+    return (
+      <View style={styles.container}>
+        <View style={[styles.view2, styles.shadowProp]}>
+          <Text style={styles.titleText}>CONTENT</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(0)}>
+            <Task label="Face at Rest" content={pictures[0]}></Task>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(1)}>
+            <Task label="Eyes Closed (G)" content={pictures[1]}></Task>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(2)}>
+            <Task label="Eyes Closed (F)" content={pictures[2]}></Task>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(3)}>
+            <Task label="Eyebrows Elevated" content={pictures[3]}></Task>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(4)}>
+            <Task label="Wrinkling of Nose" content={pictures[4]}></Task>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(5)}>
+            <Task label="Pursed Lips" content={pictures[5]}></Task>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(6)}>
+            <Task label="Big Smile" content={pictures[6]}></Task>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => toggleBoxAndNavigate(7)}>
+            <Task label="Video" content={route.params ? route.params.videoUri : null}></Task>
+          </TouchableOpacity>
+        </View>
+        <View alignItems="center" marginTop="60%">
+              <Button theme="newDefaultButton" label="Preview" onPress={toPhotoVideoPreview}></Button>
+          </View>
+      </View>
+      
+    );
+  }
+  else {
+    return (
     <View style={styles.container}>
         <View>
             <Text style={[styles.text, styles.header]}>Session Menu</Text>
@@ -193,8 +268,115 @@ function SessionMenu({ navigation, route }) {
     </View>
   );
 }
+}
 
 styles = StyleSheet.create({
+  view1: {
+    backgroundColor: "#ECECEC",
+    display: "flex",
+    maxWidth: 480,
+    width: "100%",
+    paddingBottom: 80,
+    flexDirection: "column",
+    alignItems: "stretch",
+    color: "#4437D2",
+    height: "100%"
+  },
+  buttonContainer: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignContent: "center",
+    height: "50%",
+    marginTop: "2%"
+  },
+  view2: {
+    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+    backgroundColor: "#FFF",
+    width: "100%",
+    paddingTop: "15%",
+    alignItems: "center",
+    padding: "36px 60px 10px",
+    font: "700 25px Verdana, sans-serif ",
+  },
+  view3: {
+    display: "flex",
+    marginTop: 36,
+    width: "100%",
+    flexDirection: "column",
+    alignItems: "stretch",
+    fontSize: 20,
+    fontWeight: "400",
+    padding: "0 29px",
+    justifyContent: "space-evenly",
+    height: "40%"
+  },
+  view4: {
+    fontFamily: "Verdana, sans-serif",
+    alignItems: "center"
+  },
+  view5: {
+    borderRadius: 10,
+    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+    backgroundColor: "#FFF",
+    marginTop: 16,
+    flexShrink: 0,
+    height: "26%",
+    fontSize: "20%",
+    textAlign: 'center',
+    width: "80%"   
+  },
+  view6: {
+    fontFamily: "Verdana, sans-serif",
+    marginTop: 0,
+    alignItems: "center"
+  },
+  view7: {
+    borderRadius: 10,
+    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+    backgroundColor: "#FFF",
+    marginTop: 0,
+    flexShrink: 0,
+    height: 41,
+  },
+  view8: {
+    fontFamily: "Verdana, sans-serif",
+    borderRadius: 10,
+    boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+    backgroundColor: "transparent",
+    alignSelf: "center",
+    marginTop: 57,
+    width: 291,
+    maxWidth: "100%",
+    alignItems: "center",
+    color: "#FFF",
+    whiteSpace: "nowrap",
+    justifyContent: "center",
+    padding: "18px 60px",
+  },
+  titleText: {
+    fontFamily: "Verdana, sans-serif",
+    fontWeight: "800",
+    color: "#4437D2",
+    fontSize: "25%",
+    marginLeft: 0,
+    marginRight: 0,
+    alignSelf: "center",
+    paddingBottom: "1%"
+  },
+  subHeaderText: {
+    fontFamily: "Verdana, sans-serif",
+    alignSelf: "left",
+    marginLeft: "5%",
+    fontSize: "22.5%",
+    fontWeight: "600",
+    color: "#4437D2"
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+  },
     container: {
         flex: 1
     },
@@ -249,7 +431,7 @@ styles = StyleSheet.create({
     boxContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: '130%',
+        top: "130%",
         left: '4.5%',
         marginBottom: 20,
     },

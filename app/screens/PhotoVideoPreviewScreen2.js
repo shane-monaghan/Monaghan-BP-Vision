@@ -5,6 +5,7 @@ import { Video } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { useProcessedImages } from '../navigation/CreateContext';
 import axios from 'axios';
+import Swiper from 'react-native-swiper';
 
 
 const noPic = require('../assets/images/imageNotFound.jpg');
@@ -19,7 +20,7 @@ function PhotoVideoPreview2({ navigation, route }) {
   const flaskURL = 'http://134.82.187.57:5000/';
   const [video, setVideo] = useState(route.params.videoUri);
   const [isPlotted, setIsPlotted] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(-1);
   const pictureTitles = [
     'Face at Rest',
     'Eyes Closed Gently',
@@ -150,8 +151,167 @@ function PhotoVideoPreview2({ navigation, route }) {
       date: route.params.date,
     });
   };
+  
+  if (index < 0) {
+    return (
+      <View style={styles.container}>
+        <Swiper autoplay={false} removeClippedSubviews={false} loop={false} style={styles.wrapper} activeDotColor='#4733D2'>
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[0].toUpperCase()}</Text>
+            </View>
+            {pictures[0] ? (
+            processedImages[0] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[0]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[0] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
 
-  if (index == 0) {
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[1].toUpperCase()}</Text>
+            </View>
+            {pictures[1] ? (
+            processedImages[1] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[1]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[1] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[2].toUpperCase()}</Text>
+            </View>
+            {pictures[2] ? (
+            processedImages[2] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[2]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[2] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[3].toUpperCase()}</Text>
+            </View>
+            {pictures[3] ? (
+            processedImages[3] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[3]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[3] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[4].toUpperCase()}</Text>
+            </View>
+            {pictures[4] ? (
+            processedImages[4] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[4]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[4] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[5].toUpperCase()}</Text>
+            </View>
+            {pictures[5] ? (
+            processedImages[5] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[5]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[5] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[6].toUpperCase()}</Text>
+            </View>
+            {pictures[6] ? (
+            processedImages[6] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[6]}` }} />
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: pictures[6] }} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[7].toUpperCase()}</Text>
+            </View>
+            {video ? (
+            !isPlotted ? (
+            <Video style={styles.image} resizeMode='cover' useNativeControls source={{ uri: video }} />
+            ) : (
+            <Video style={styles.image} resizeMode='cover' useNativeControls source={plotted_video_src} />
+            )
+            ) : (
+            <Image style={styles.image} resizeMode='cover' source={noPic} />
+            )}
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
+            </View>
+          </View>
+        </Swiper>
+      </View>
+    )
+  }
+  else if (index == 0) {
     return (
         <View style={styles.container}>
             <View>
@@ -234,10 +394,36 @@ const styles = StyleSheet.create({
         flex: 1,
         alignContent: 'center'
     },
+    titleText: {
+      fontFamily: "Verdana, sans-serif",
+      fontWeight: "800",
+      color: "#4437D2",
+      fontSize: "25%",
+      marginLeft: 0,
+      marginRight: 0,
+      alignSelf: "center",
+      paddingBottom: "1%"
+    },
+    contentDataContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      top: "-12.5%",
+      justifyContent: "space-around",
+      marginLeft: "auto",
+      marginRight: 'auto'
+    },
+    shadowProp: {
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.5,
+      shadowRadius: 3,
+    },
     rowContainer: {
         minHeight: '10%',
         flexDirection: 'row',
         marginBottom: -55
+    },
+    wrapper: {
     },
     line: {
         borderBottomColor: '#00419D',
@@ -261,9 +447,19 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
         borderWidth: 3,
-        borderColor: '#00419D',
+        borderColor: '#4437D2',
         width: 350,
-        height: 622
+        height: 622,
+        borderRadius: "10%"
+      },
+      view2: {
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        backgroundColor: "#FFF",
+        width: "100%",
+        paddingTop: "15%",
+        alignItems: "center",
+        padding: "36px 60px 10px",
+        font: "700 25px Verdana, sans-serif ",
       },
       oneArrowContainer: {
         position: 'absolute',

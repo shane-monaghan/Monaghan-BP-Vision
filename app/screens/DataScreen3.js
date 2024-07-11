@@ -4,11 +4,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Button from '../../components/Button';
 import { Video } from 'expo-av';
 import axios from 'axios';
+import { useProcessedImages } from '../navigation/CreateContext';
 import * as FileSystem from 'expo-file-system';
+import Swiper from 'react-native-swiper';
 
 const noPic = require('../assets/images/imageNotFound.jpg');
 
 function DataScreen3({ navigation, route }) {
+  const { processedImages, setProcessedImages } = useProcessedImages();
   const { pictures } = route.params;
   const { originalPictures } = route.params;
   // const flaskURL = 'http://134.82.182.163:5000/'; //SCHOOL
@@ -18,6 +21,7 @@ function DataScreen3({ navigation, route }) {
   const [landmarkData, setLandmarkData] = useState([
     null, null, null, null, null, null, null
   ]);
+  const [isTesting, setTesting] = useState(true);
   const [video, setVideo] = useState([true]);
   const [index, setIndex] = useState(0);
   const [displayPlot, togglePlot] = useState(true);
@@ -182,8 +186,203 @@ function DataScreen3({ navigation, route }) {
       </View>
     )
   );
+  if (isTesting) {
+    return (
+      <View style={styles.container}>
+        <Swiper loop={false} removeClippedSubviews={false} autoplay={false} style={styles.wrapper} activeDotColor='#4733D2' onIndexChanged={(newIndex) => setIndex(newIndex)}>
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[0].toUpperCase()}</Text>
+            </View>
+            { processedImages[0] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[0]}` }} />
+            ) 
+            : (
+            <Image style={[styles.image, styles.shadowProp]} resizeMode='cover' source={noPic} />
+            )}
+            <ScrollView style={[styles.resultBox, styles.shadowProp]}>
+                <View style={styles.resultRow}>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Distances</Text>
+                        {distsText}
+                    </View>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Features</Text>
+                        {featuresText}
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.contentDataContainer}>
+                <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+            </View>
+          </View>
 
-  if (index === 0) {
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[1].toUpperCase()}</Text>
+            </View>
+            { processedImages[1] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[1]}` }} />
+            ) 
+            : (
+            <Image style={[styles.image, styles.shadowProp]} resizeMode='cover' source={noPic} />
+            )}
+            <ScrollView style={[styles.resultBox, styles.shadowProp]}>
+                <View style={styles.resultRow}>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Distances</Text>
+                        {distsText}
+                    </View>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Features</Text>
+                        {featuresText}
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.contentDataContainer}>
+              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[2].toUpperCase()}</Text>
+            </View>
+            { processedImages[2] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[2]}` }} />
+            ) 
+            : (
+            <Image style={[styles.image, styles.shadowProp]} resizeMode='cover' source={noPic} />
+            )}
+            <ScrollView style={[styles.resultBox, styles.shadowProp]}>
+                <View style={styles.resultRow}>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Distances</Text>
+                        {distsText}
+                    </View>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Features</Text>
+                        {featuresText}
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.contentDataContainer}>
+              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[3].toUpperCase()}</Text>
+            </View>
+            { processedImages[3] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[3]}` }} />
+            ) 
+            : (
+            <Image style={[styles.image, styles.shadowProp]} resizeMode='cover' source={noPic} />
+            )}
+            <ScrollView style={[styles.resultBox, styles.shadowProp]}>
+                <View style={styles.resultRow}>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Distances</Text>
+                        {distsText}
+                    </View>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Features</Text>
+                        {featuresText}
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.contentDataContainer}>
+              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[4].toUpperCase()}</Text>
+            </View>
+            { processedImages[4] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[4]}` }} />
+            ) 
+            : (
+            <Image style={[styles.image, styles.shadowProp]} resizeMode='cover' source={noPic} />
+            )}
+            <ScrollView style={[styles.resultBox, styles.shadowProp]}>
+                <View style={styles.resultRow}>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Distances</Text>
+                        {distsText}
+                    </View>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Features</Text>
+                        {featuresText}
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.contentDataContainer}>
+              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[5].toUpperCase()}</Text>
+            </View>
+            { processedImages[5] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[5]}` }} />
+            ) 
+            : (
+            <Image style={[styles.image, styles.shadowProp]} resizeMode='cover' source={noPic} />
+            )}
+            <ScrollView style={[styles.resultBox, styles.shadowProp]}>
+                <View style={styles.resultRow}>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Distances</Text>
+                        {distsText}
+                    </View>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Features</Text>
+                        {featuresText}
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.contentDataContainer}>
+              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+            </View>
+          </View>
+
+          <View>
+            <View style={[styles.view2, styles.shadowProp]}>
+              <Text style={styles.titleText}>{pictureTitles[6].toUpperCase()}</Text>
+            </View>
+            { processedImages[6] ? (
+            <Image style={styles.image} resizeMode='cover' source={{ uri: `data:image/jpeg;base64,${processedImages[6]}` }} />
+            ) 
+            : (
+            <Image style={[styles.image, styles.shadowProp]} resizeMode='cover' source={noPic} />
+            )}
+            <ScrollView style={[styles.resultBox, styles.shadowProp]}>
+                <View style={styles.resultRow}>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Distances</Text>
+                        {distsText}
+                    </View>
+                    <View style={styles.resultCol}>
+                        <Text style={styles.resultHeader}>Features</Text>
+                        {featuresText}
+                    </View>
+                </View>
+            </ScrollView>
+            <View style={styles.contentDataContainer}>
+              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+            </View>
+          </View>
+        </Swiper>
+      </View>
+    )
+  }
+  else if (index === 0) {
     return (
         <View style={styles.container}>
             <Text style={[styles.text, styles.header]}>{pictureTitles[index]}</Text>
@@ -191,7 +390,7 @@ function DataScreen3({ navigation, route }) {
             {pictures[index] ? 
                 (
                 displayPlot ? (
-                <Image style={styles.image} resizeMode="cover" source={{ uri: `data:image/jpeg;base64,${pictures[index]}` }} />
+                <Image style={styles.image} resizeMode="cover" source={{ uri: `data:image/jpeg;base64,${processedImages[0]}` }} />
                 )
             : <Image style={styles.image} resizeMode="cover" source={{ uri: originalPictures[index] }} />
                 ): (
@@ -280,7 +479,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: '#D9D9D9'
     },
     endScreen: {
       flex: 1,
@@ -297,8 +496,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: '3%'
     },
     text: {
-        fontFamily: 'Arial',
-        color: '#00419D'
+        fontFamily: 'Verdana, sans-serif',
+        color: '#4437D2',
+        fontSize: "10%"
     },
     header: {
         fontWeight: 'bold',
@@ -307,16 +507,49 @@ const styles = StyleSheet.create({
         paddingBottom: '2%',
         textAlign: 'center',
     },
+    shadowProp: {
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.5,
+      shadowRadius: 3,
+    },
+    view2: {
+      boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+      backgroundColor: "#FFF",
+      width: "100%",
+      paddingTop: "15%",
+      alignItems: "center",
+      padding: "36px 60px 10px",
+      font: "700 25px Verdana, sans-serif ",
+    },
+    contentDataContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      top: '80%',
+      justifyContent: "space-around",
+      marginLeft: "auto",
+      marginRight: 'auto'
+    },
+    titleText: {
+      fontFamily: "Verdana, sans-serif",
+      fontWeight: "800",
+      color: "#4437D2",
+      fontSize: "25%",
+      marginLeft: 0,
+      marginRight: 0,
+      alignSelf: "center",
+      paddingBottom: "1%"
+    },
     image: {
         position: 'static',
-        top: '-9%',
+        top: '-13%',
         marginTop: '25%',
         marginLeft: 'auto',
         marginRight: 'auto',
-        borderWidth: 3,
+        borderWidth: 0,
         borderColor: '#00419D',
         width: '84%',
-        height: '40%'
+        height: '40%',
       },
     toggleButtonContainer: {
         position: 'absolute',
@@ -366,11 +599,12 @@ const styles = StyleSheet.create({
       resultBox: {
         position: 'absolute',
         flexDirection: 'column',
-        borderColor: '#00419D',
+        borderColor: '#4437D2',
         borderWidth: '2%',
+        borderRadius: "10%",
         top: '60%',
         width: '85%',
-        height: '26%',
+        height: '60%',
         left: '7.5%',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -384,9 +618,17 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'left'
       },
+      wrapper: {
+      },
       resultHeader: {
+        fontFamily: "Verdana, sans-serif",
+        fontSize: "20%",
         fontWeight: 'bold',
         textDecorationLine: 'underline'
+      },
+      entry: {
+        fontFamily: "Verdana, sans-serif",
+        fontSize: "19%"
       }
 });
 

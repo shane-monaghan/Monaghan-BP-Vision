@@ -48,6 +48,22 @@ export default function Button({ label, theme, onPress }) {
     </View>
     );
   }
+  else if (theme === "newDefaultButton1"){
+    return(
+        //What container, and alternate settings for that container
+        <View style = {[styles.newDefButContainer1, styles.shadowProp, {borderWidth: 0, borderColor: "white", borderRadius: 15, margin: 30, marginTop: 0}]}
+    >
+        {/* Declare the button is pressable */}
+        <Pressable
+         style = {[styles.button, {backgroundColor: '#4437D2'}]}
+         onPress = {onPress}
+         accessibilityLanguage='Default Button'
+         >
+          <Text style = {[styles.buttonLabel, {color: "white"}]}>{label}</Text>  
+         </Pressable>
+    </View>
+    );
+  }
 
   //To gallery button
   else if (theme === "toGallery"){
@@ -406,6 +422,14 @@ const styles = StyleSheet.create({
   },
   newDefButContainer: {
     width: 280,
+    height: 50,
+    marginHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
+  },
+  newDefButContainer1: {
+    width: 140,
     height: 50,
     marginHorizontal: 20,
     alignItems: 'center',

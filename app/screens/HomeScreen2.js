@@ -52,71 +52,109 @@ function HomeScreen2({navigation}) {
     }
 
     return (
-        <View style={styles.container}>
-            <ImageBackground source={backgroundImage} resizeMode='cover' style={styles.image} blurRadius={10}>
-                <View style={styles.overlay}>
-                    <View style={styles.container}>
-                        <Text style={[styles.text, styles.title]}>
-                            <Text style={styles.bp}>BP</Text> VISION
-                        </Text>
-                        <Image source={logo} style={[styles.eyeball]}></Image>
-                        <View style={styles.buttonContainer}>
-                            <Button style={styles.newSession} theme = "toCameraScreen" label = "START A NEW SESSION" onPress={(toSPS)} />
-                            <Button theme = "toGallery" label="VIEW PREVIOUS SESSIONS" onPress={toSavedSessions} />
-                        </View>
-                    </View>
-                </View>
-            </ImageBackground>
+        <View style={styles.view1}>
+          <View style={[styles.view2, styles.shadowProp]}>
+            <View style={styles.view3}>
+              <Text style={styles.titleText}>BP VISION</Text>
+            </View>
+            <Image
+              resizeMode="auto"
+              source={{
+                uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/0416dee6b94f00c7ed64c3665f3f6799f0743526419ccf1da40fa9afa7e5c47c?",
+              }}
+              style={styles.image1}
+            />
+          </View>
+          <View style={styles.view4}>
+            <Button style={styles.view4} theme="toCameraScreen" label="New Session" onPress={(toSPS)}/>
+          </View>
+          <View style={styles.view5}>
+            <Button style={styles.view5} theme="toGallery" label="Load Session" onPress={(toSavedSessions)}/>
+          </View>
+          
         </View>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    overlay: {
-        flex:1,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
-    },
-    image: {
-        flex: 1,
-        justifyContent: 'center',
-        alignContent: 'center'
-    },
-    eyeball: {
-        width: 200,
-        height: 200,
-        position: 'absolute',
-        top: '27.5%',
-        left: '25%'
-        
-    },
-    buttonContainer: {
-        position: 'absolute', 
-        top: '15%', 
-        left: 0, 
-        right: 0, 
-        bottom: 0, 
-        justifyContent: 'center', 
-        alignItems: 'center'
-    },
-    text: {
-        flex: 1,
-        justifyContent: 'center',
-        alignContent:'center',
-        fontFamily: 'Arial',
-    },
-    title: {
-        color: 'white',
-        textAlign: 'center',
-        textAlignVertical: 'top',
-        paddingTop: "35%",
-        fontSize: 65,
-        fontWeight: 'bold'
-    },
-    bp: {
-        color: '#33ADF0'
+      );
     }
-})
+    
+    const styles = StyleSheet.create({
+      view1: {
+        backgroundColor: "#FFF",
+        display: "flex",
+        maxWidth: 480,
+        width: "100%",
+        height: "100%",
+        paddingBottom: 80,
+        flexDirection: "column",
+        alignItems: "center",
+        fontSize: 20,
+        color: "#FFF",
+        fontWeight: "400",
+        margin: "0 auto",
+      },
+      view2: {
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 1)",
+        backgroundColor: "#4437D2",
+        alignSelf: "stretch",
+        display: "flex",
+        width: "100%",
+        height: "65%",
+        flexDirection: "column",
+        alignItems: "stretch",
+        fontSize: 50,
+        fontWeight: "700",
+        padding: "80px 42px 52px",
+      },
+      shadowProp: {
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+      },
+      view3: {
+        fontFamily: "Verdana, sans-serif",
+        marginTop: "25%",
+      },
+      titleText: {
+        fontFamily: "Verdana, sans-serif",
+        fontWeight: "bold",
+        color: "white",
+        fontSize: "60%",
+        marginLeft: 0,
+        marginRight: 0,
+        alignSelf: "center",
+      },
+      image1: {
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        alignSelf: "center",
+        position: "relative",
+        marginTop: 15,
+        width: 256,
+        maxWidth: "100%",
+        aspectRatio: "1",
+      },
+      view4: {
+        fontFamily: "Verdana, sans-serif",
+        borderRadius: 10,
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        backgroundColor: "transparent",
+        marginTop: 15,
+        width: "100%",
+        maxWidth: 291,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "18px 60px",
+      },
+      view5: {
+        fontFamily: "Verdana, sans-serif",
+        borderRadius: 10,
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        backgroundColor: "#4437D2",
+        marginTop: 20,
+        width: "100%",
+        maxWidth: 291,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "18px 60px",
+      },
+    });
 export default HomeScreen2;
