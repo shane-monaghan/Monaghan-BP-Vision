@@ -213,7 +213,7 @@ function DataScreen3({ navigation, route }) {
                 </View>
             </ScrollView>
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+                <Button theme="newDefaultButton" label="Go Back" onPress={goBack}></Button>
             </View>
           </View>
 
@@ -240,7 +240,7 @@ function DataScreen3({ navigation, route }) {
                 </View>
             </ScrollView>
             <View style={styles.contentDataContainer}>
-              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+              <Button theme="newDefaultButton" label="Go Back" onPress={goBack}></Button>
             </View>
           </View>
 
@@ -267,7 +267,7 @@ function DataScreen3({ navigation, route }) {
                 </View>
             </ScrollView>
             <View style={styles.contentDataContainer}>
-              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+              <Button theme="newDefaultButton" label="Go Back" onPress={goBack}></Button>
             </View>
           </View>
 
@@ -294,7 +294,7 @@ function DataScreen3({ navigation, route }) {
                 </View>
             </ScrollView>
             <View style={styles.contentDataContainer}>
-              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+              <Button theme="newDefaultButton" label="Go Back" onPress={goBack}></Button>
             </View>
           </View>
 
@@ -321,7 +321,7 @@ function DataScreen3({ navigation, route }) {
                 </View>
             </ScrollView>
             <View style={styles.contentDataContainer}>
-              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+              <Button theme="newDefaultButton" label="Go Back" onPress={goBack}></Button>
             </View>
           </View>
 
@@ -348,7 +348,7 @@ function DataScreen3({ navigation, route }) {
                 </View>
             </ScrollView>
             <View style={styles.contentDataContainer}>
-              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+              <Button theme="newDefaultButton" label="Go Back" onPress={goBack}></Button>
             </View>
           </View>
 
@@ -375,9 +375,30 @@ function DataScreen3({ navigation, route }) {
                 </View>
             </ScrollView>
             <View style={styles.contentDataContainer}>
-              <Button theme="newDefaultButton" label="Back To Preview" onPress={goBack}></Button>
+              <Button theme="newDefaultButton" label="Go Back" onPress={goBack}></Button>
             </View>
           </View>
+
+          <View style={styles.view1}>
+      <View style={[styles.view10, styles.shadowProp]}>
+        <View style={styles.view3}>
+          <Text style={styles.titleText2}>SESSION COMPLETE</Text>
+        </View>
+        <Image
+          resizeMode="auto"
+          source={{
+            uri: "https://cdn.builder.io/api/v1/image/assets/TEMP/0416dee6b94f00c7ed64c3665f3f6799f0743526419ccf1da40fa9afa7e5c47c?",
+          }}
+          style={styles.image1}
+        />
+      </View>
+      <View style={styles.view4} marginTop="20%">
+        <Button style={styles.view4} theme="newDefaultButton2" label="Save Session" onPress={(saveSession)}/>
+      </View>
+      <View style={styles.view5} backgroundColor="transparent">
+        <Button style={styles.view5} theme="newDefaultButton3" label="Main Menu" onPress={(toHome)}/>
+      </View>
+    </View>
         </Swiper>
       </View>
     )
@@ -629,7 +650,87 @@ const styles = StyleSheet.create({
       entry: {
         fontFamily: "Verdana, sans-serif",
         fontSize: "19%"
-      }
+      },
+      view1: {
+        backgroundColor: "#4437D2",
+        display: "flex",
+        maxWidth: 480,
+        width: "100%",
+        height: "100%",
+        paddingBottom: 80,
+        flexDirection: "column",
+        alignItems: "center",
+        fontSize: 20,
+        color: "#FFF",
+        fontWeight: "400",
+        margin: "0 auto",
+      },
+      view10: {
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 1)",
+        backgroundColor: "white",
+        alignSelf: "stretch",
+        display: "flex",
+        width: "100%",
+        height: "65%",
+        flexDirection: "column",
+        alignItems: "stretch",
+        fontSize: 50,
+        fontWeight: "700",
+        padding: "80px 42px 52px",
+      },
+      shadowProp: {
+        shadowColor: '#171717',
+        shadowOffset: {width: -2, height: 4},
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+      },
+      view3: {
+        fontFamily: "Verdana, sans-serif",
+        marginTop: "20%",
+      },
+      titleText2: {
+        fontFamily: "Verdana, sans-serif",
+        fontWeight: "bold",
+        color: "#4437D2",
+        fontSize: "60%",
+        marginLeft: 0,
+        marginRight: 0,
+        alignSelf: "center",
+        textAlign: "center"
+      },
+      image1: {
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        alignSelf: "center",
+        position: "relative",
+        marginTop: 15,
+        width: 256,
+        maxWidth: "100%",
+        aspectRatio: "1",
+      },
+      view4: {
+        fontFamily: "Verdana, sans-serif",
+        borderRadius: 10,
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        backgroundColor: "transparent",
+        marginTop: 15,
+        width: "100%",
+        maxWidth: 291,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "18px 60px",
+      },
+      view5: {
+        fontFamily: "Verdana, sans-serif",
+        borderRadius: 10,
+        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        backgroundColor: "#4437D2",
+        marginTop: 20,
+        width: "100%",
+        maxWidth: 291,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "18px 60px",
+      },
 });
 
 export default DataScreen3;

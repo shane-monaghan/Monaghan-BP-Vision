@@ -4,10 +4,15 @@ import { Camera, CameraView } from 'expo-camera';
 import { Video } from 'expo-av';
 import * as MediaLibrary from 'expo-media-library';
 import Button from '../../components/Button';
+import { useProcessedImages } from '../navigation/CreateContext';
+import * as FileSystem from 'expo-file-system';
+import axios from 'axios';
 
 function VideoScreen2({ navigation, route }) {
   const [isRecording, setIsRecording] = useState(false);
+  const flaskURL = 'http://134.82.187.57:5000/';
   const [video, setVideo] = useState(undefined);
+  const { processedImages, setProcessedImages } = useProcessedImages();
   const [hasMicrophonePermission, setHasMicrophonePermission] = useState();
   const [cameraType, setCameraType] = useState('back');
   const cameraRef = useRef();
@@ -58,19 +63,24 @@ function VideoScreen2({ navigation, route }) {
       try {
         console.log("Starting Video");
         const videoURI = video;
-        const videoBase64 = await FileSystem.readAsStringAsync(videoURI, {
+        const videoBase64 = await FileSystem.readAsStringAsync(videoURI.uri, {
           encoding: FileSystem.EncodingType.Base64,
         });
         const response = await axios.post(flaskURL + 'plotVideo', {
           encoded_video: videoBase64,
         });
+        const newProcessedImages = [...processedImages];
+        newProcessedImages[7] = [response.uri];
+        setProcessedImages(newProcessedImages);
+        console.log(processedImages);
       } catch (error) {
         console.error('Error converting video:', error);
       }
     }
   } 
-
+ 
   const transferVideo = () => {
+    plotVideo();
     navigation.navigate('SevenPhoto', {
       videoUri: video.uri,
       pictures: route.params.pictures,

@@ -19,7 +19,6 @@ function PhotoVideoPreview2({ navigation, route }) {
   // const flaskURL = 'http://134.82.163.84:5000/'; //SCHOOL 2
   const flaskURL = 'http://134.82.187.57:5000/';
   const [video, setVideo] = useState(route.params.videoUri);
-  const [isPlotted, setIsPlotted] = useState(false);
   const [index, setIndex] = useState(-1);
   const pictureTitles = [
     'Face at Rest',
@@ -170,7 +169,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>
@@ -189,7 +188,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>
@@ -208,7 +207,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>
@@ -227,7 +226,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>
@@ -246,7 +245,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>
@@ -265,7 +264,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>
@@ -284,7 +283,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>
@@ -294,7 +293,7 @@ function PhotoVideoPreview2({ navigation, route }) {
               <Text style={styles.titleText}>{pictureTitles[7].toUpperCase()}</Text>
             </View>
             {video ? (
-            !isPlotted ? (
+            !processedImages[7] ? (
             <Video style={styles.image} resizeMode='cover' useNativeControls source={{ uri: video }} />
             ) : (
             <Video style={styles.image} resizeMode='cover' useNativeControls source={plotted_video_src} />
@@ -303,7 +302,7 @@ function PhotoVideoPreview2({ navigation, route }) {
             <Image style={styles.image} resizeMode='cover' source={noPic} />
             )}
             <View style={styles.contentDataContainer}>
-                <Button theme="newDefaultButton1" label="Content Menu" onPress={goBack}></Button>
+                <Button theme="newDefaultButton1" label="Go Back" onPress={goBack}></Button>
                 <Button theme="newDefaultButton1" label="View Data" onPress={toDataScreen}></Button>
             </View>
           </View>

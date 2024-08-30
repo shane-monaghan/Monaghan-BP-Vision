@@ -101,7 +101,7 @@ export default function CameraScreen3({navigation, route}) {
         setPhoto(undefined);
       })
     };
-
+ 
     return(
       <SafeAreaView style = {styles.container}>
         <Text style={styles.directionsText}>{customText}</Text>

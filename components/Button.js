@@ -64,6 +64,49 @@ export default function Button({ label, theme, onPress }) {
     </View>
     );
   }
+  else if (theme === "newDefaultButton2"){
+    return(
+        //What container, and alternate settings for that container
+        <View style = {[styles.newDefButContainer, styles.shadowProp, {borderWidth: 0, borderColor: "white", borderRadius: 15, margin: 30, marginTop: 0}]}
+    >
+        {/* Declare the button is pressable */}
+        <Pressable
+         style = {[styles.button, {backgroundColor: 'white'}]}
+         onPress = {onPress}
+         accessibilityLanguage='Default Button'
+         >
+          <FontAwesome
+          name = "save"
+          size = {18}
+          color = "#4733D2"
+          style = {styles.buttonIcon}/>
+          <Text style = {[styles.buttonLabel, {color: "#4733D2"}]}>{label}</Text>  
+         </Pressable>
+    </View>
+    );
+  }
+
+  else if (theme === "newDefaultButton3"){
+    return(
+        //What container, and alternate settings for that container
+        <View style = {[styles.newDefButContainer, styles.shadowProp, {borderWidth: 0, borderColor: "white", borderRadius: 15, margin: 30, marginTop: 0}]}
+    >
+        {/* Declare the button is pressable */}
+        <Pressable
+         style = {[styles.button, {backgroundColor: 'white'}]}
+         onPress = {onPress}
+         accessibilityLanguage='Default Button'
+         >
+          <Ionicons
+          name = "home"
+          size = {20}
+          color = "#4733D2"
+          style = {styles.buttonIcon}/>
+          <Text style = {[styles.buttonLabel, {color: "#4733D2"}]}>{label}</Text>  
+         </Pressable>
+    </View>
+    );
+  }
 
   //To gallery button
   else if (theme === "toGallery"){

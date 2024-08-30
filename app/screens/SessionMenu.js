@@ -148,6 +148,15 @@ function SessionMenu({ navigation, route }) {
     navigation.navigate('PicturePreview', { pictures: pictures });
   };
 
+  const goBack = () => {
+    navigation.goBack();
+  };
+
+  const goBackMainMenu = () => {
+    setProcessedImages([]);
+    navigation.goBack();
+  };
+
   const toVideo = (pictures) => {
     navigation.navigate('VideoScreen', { pictures: pictures, name: name, date: date, setVideo: setVideo, video: video });
   };
@@ -160,7 +169,7 @@ function SessionMenu({ navigation, route }) {
         </View>
         <View style={styles.view3}>
           <View style={styles.view4}>
-              <Text style={styles.subHeaderText}>Patient Name</Text>
+              <Text marginTop="3%" style={styles.subHeaderText}>Patient Name</Text>
             <TextInput
               style={[styles.view5, styles.shadowProp]}
               placeholder="Patient Name"
@@ -179,6 +188,7 @@ function SessionMenu({ navigation, route }) {
           </View>
           <View alignItems="center" marginTop="5%">
               <Button theme="newDefaultButton" label="Next" onPress={() => setShowPatientInfo(2)}></Button>
+              <Button theme="newDefaultButton" label="Go Back" onPress={goBackMainMenu}></Button>
           </View>
         </View>
       </View>
@@ -216,8 +226,9 @@ function SessionMenu({ navigation, route }) {
             <Task label="Video" content={route.params ? route.params.videoUri : null}></Task>
           </TouchableOpacity>
         </View>
-        <View alignItems="center" marginTop="60%">
-              <Button theme="newDefaultButton" label="Preview" onPress={toPhotoVideoPreview}></Button>
+        <View alignItems="center" marginTop="60%" flexDirection="row" alignSelf="center">
+              <Button theme="newDefaultButton1" label="Go Back" onPress={() => setShowPatientInfo(1)}></Button>
+              <Button theme="newDefaultButton1" label="Preview" onPress={toPhotoVideoPreview}></Button>
           </View>
       </View>
       
